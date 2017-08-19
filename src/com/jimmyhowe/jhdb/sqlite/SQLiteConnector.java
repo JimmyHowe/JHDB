@@ -21,11 +21,11 @@ import java.util.Properties;
 public class SQLiteConnector extends Connector
 {
     /**
-     * @param driver SQLite Adapter
+     * @param plugin SQLite Plugin
      */
-    public SQLiteConnector(Plugin driver)
+    public SQLiteConnector(Plugin plugin)
     {
-        super(driver);
+        super(plugin);
     }
 
     /**

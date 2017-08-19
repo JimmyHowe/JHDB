@@ -18,22 +18,22 @@ public interface Plugin
     @NotNull String getDriver();
 
     /**
-     * @return A fresh Connection
+     * @return Connector Instance
      */
     @NotNull Connector getConnector();
 
     /**
-     * @return A fresh Connection
+     * @return Connection Instance
      */
     @NotNull Connection getConnection();
 
     /**
-     * @return A fresh Connection
+     * @return Query Grammar Instance
      */
     @Nullable QueryGrammar getQueryGrammar();
 
     /**
-     * @return A fresh Connection
+     * @return Schema Grammar Instance
      */
     @Nullable SchemaGrammar getSchemaGrammar();
 

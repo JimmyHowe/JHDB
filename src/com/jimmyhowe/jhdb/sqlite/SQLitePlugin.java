@@ -6,105 +6,62 @@ import com.jimmyhowe.jhdb.core.Connector;
 import com.jimmyhowe.jhdb.core.queries.QueryGrammar;
 import com.jimmyhowe.jhdb.core.schema.SchemaGrammar;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Properties;
 
 /**
- * Created by Jimmy on 29/05/2017.
+ * SQLite Plugin
  */
 public class SQLitePlugin implements Plugin
 {
-    private String driver = "com.";
+    private String driver = "org.sqlite.JDBC";
 
     private String database = "database.sqlite";
 
     private String prefix = "";
 
-    public String driver()
-    {
-        return driver;
-    }
-
-    @NotNull
-    public SQLitePlugin driver(String driver)
-    {
-        this.driver = driver;
-
-        return this;
-    }
-
-    public String database()
-    {
-        return database;
-    }
-
-    @NotNull
-    public SQLitePlugin database(String database)
-    {
-        this.database = database;
-
-        return this;
-    }
-
-    public String prefix()
-    {
-        return prefix;
-    }
-
-    @NotNull
-    public SQLitePlugin prefix(String prefix)
-    {
-        this.prefix = prefix;
-
-        return this;
-    }
-
     /**
      * @return Driver String
      */
-    @NotNull
     @Override
-    public String getDriver()
+    public @NotNull String getDriver()
     {
         return "org.sqlite.JDBC";
     }
 
     /**
-     * @return A fresh Connection
+     * @return Connector Instance
      */
-    @NotNull
     @Override
-    public Connector getConnector()
+    public @NotNull Connector getConnector()
     {
         return new SQLiteConnector(this);
     }
 
     /**
-     * @return A fresh Connection
+     * @return Connection Instance
      */
-    @NotNull
     @Override
-    public Connection getConnection()
+    public @NotNull Connection getConnection()
     {
         return new SQLiteConnection(this);
     }
 
     /**
-     * @return A fresh Connection
+     * @return Query Grammar Instance
      */
-    @NotNull
     @Override
-    public QueryGrammar getQueryGrammar()
+    public @Nullable QueryGrammar getQueryGrammar()
     {
         return new SQLiteQueryGrammar();
     }
 
     /**
-     * @return A fresh Connection
+     * @return Schema Grammar Instance
      */
-    @NotNull
     @Override
-    public SchemaGrammar getSchemaGrammar()
+    public @Nullable SchemaGrammar getSchemaGrammar()
     {
         return new SQLiteSchemaGrammar();
     }
@@ -112,9 +69,8 @@ public class SQLitePlugin implements Plugin
     /**
      * @return Properties Object
      */
-    @NotNull
     @Override
-    public Properties getProperties()
+    public @Nullable Properties getProperties()
     {
         Properties properties = new Properties();
 
@@ -125,14 +81,43 @@ public class SQLitePlugin implements Plugin
         return properties;
     }
 
-    @NotNull
-    @Override
-    public String toString()
+    /**
+     * @param driver Driver String
+     */
+    public void setDriver(String driver)
     {
-        return "SQLiteAdapter{" +
-                "driver='" + driver + '\'' +
-                ", database='" + database + '\'' +
-                ", prefix='" + prefix + '\'' +
-                "} " + super.toString();
+        this.driver = driver;
+    }
+
+    /**
+     * @return Database name
+     */
+    public String getDatabase()
+    {
+        return database;
+    }
+
+    /**
+     * @param database Database name
+     */
+    public void setDatabase(String database)
+    {
+        this.database = database;
+    }
+
+    /**
+     * @return Table prefix
+     */
+    public String getPrefix()
+    {
+        return prefix;
+    }
+
+    /**
+     * @param prefix Table prefix
+     */
+    public void setPrefix(String prefix)
+    {
+        this.prefix = prefix;
     }
 }
