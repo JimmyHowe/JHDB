@@ -27,8 +27,8 @@ package com.jimmyhowe.jhdb.core;
 import com.jimmyhowe.jhdb.core.exceptions.InvalidArgumentException;
 import com.jimmyhowe.jhdb.core.queries.QueryBuilder;
 import com.jimmyhowe.jhdb.core.utilities.QueryLog;
-import com.jimmyhowe.jhdb.events.Dispatcher;
-import com.jimmyhowe.jhdb.events.Listener;
+import com.jimmyhowe.dispatcher.Dispatcher;
+import com.jimmyhowe.dispatcher.Listener;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
