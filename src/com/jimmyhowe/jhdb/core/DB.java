@@ -83,7 +83,7 @@ public class DB
      * This stores the connection from the adapter in the list of adapters but provides a lookup key. if this is the
      * first connection then it stores the key as the default connection key.
      *
-     * @param key     Connection Key
+     * @param key    Connection Key
      * @param plugin Connection Adapter
      *
      * @return The Connection
@@ -97,6 +97,8 @@ public class DB
 
         connections.put(key, plugin.getConnection());
 
+        DB.getQueryLog().info("Registered " + plugin.getClass().getSimpleName() + " plugin as '" + key + "'.");
+
         return connections.get(key);
     }
 
@@ -109,7 +111,7 @@ public class DB
     {
         if ( ! connections.containsKey(key) )
         {
-            throw new RuntimeException("DB: No connections set");
+            throw new InvalidArgumentException("Connection '" + key + "' does not exist.");
         }
 
         return connections.get(key);
@@ -126,7 +128,7 @@ public class DB
     {
         if ( ! connections.containsKey(defaultConnectionKey) )
         {
-            throw new InvalidArgumentException("DB: No default connection set");
+            throw new InvalidArgumentException("Default connection is not set.");
         }
 
         return connections.get(defaultConnectionKey);
@@ -134,9 +136,16 @@ public class DB
 
     /**
      * Flushes all the connections by iterating through the list of connections and closing them.
+     *
+     * TODO: flush debug message cant be registered if there is no connection.
+     * TODO: Consider using only one log object on the DB facade, and tagging log messages with connection details.
      */
     public static void flushConnections()
     {
+        DB.getQueryLog().debug("Flushing connections.");
+
+        DB.getDispatcher().dispatch("flushing");
+
         for ( Map.Entry<String, Connection> entries : connections.entrySet() )
         {
             entries.getValue().closeConnection();
@@ -263,18 +272,28 @@ public class DB
     }
 
     /**
-     * Outputs com.jimmyhowe.jhdb.queries to the stdout before processing
+     * Outputs queries to the stdout before processing
      */
     public static void liveQueries()
     {
         liveQueries = true;
     }
 
+    /**
+     * @param query Query string
+     *
+     * @return ResultSet
+     */
     public static @Nullable ResultSet statement(String query)
     {
         return getDefaultConnection().statement(query);
     }
 
+    /**
+     * @param query Query string
+     *
+     * @return True or false on success
+     */
     public static boolean execute(String query)
     {
         return getDefaultConnection().execute(query);
@@ -308,6 +327,11 @@ public class DB
         dispatcher.listen("flushed", listener);
     }
 
+    /**
+     * Fire event when the JDBC Connection is created.
+     *
+     * @param listener Callback
+     */
     public static void onJdbcConnectionCreated(Listener listener)
     {
         dispatcher.listen("connector.created", listener);
