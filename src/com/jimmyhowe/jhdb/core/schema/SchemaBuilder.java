@@ -155,4 +155,24 @@ public class SchemaBuilder
 
         return ! row.isEmpty();
     }
+
+    /**
+     * @param table Table name
+     */
+    public void dropIfExists(String table)
+    {
+        for ( Connection connection : connections )
+        {
+            performDropIfExists(connection, table);
+        }
+    }
+
+    private void performDropIfExists(Connection connection, String table)
+    {
+        blueprint = createBlueprint(table);
+
+        blueprint.dropIfExists();
+
+        build(blueprint, connection);
+    }
 }

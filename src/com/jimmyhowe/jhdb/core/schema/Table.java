@@ -264,6 +264,8 @@ public class Table
                     break;
                 case "drop":
                     statements.add(schemaGrammar.drop(this, command, connection));
+                case "dropIfExists":
+                    statements.add(schemaGrammar.dropIfExists(this, command, connection));
             }
         }
 
@@ -320,5 +322,10 @@ public class Table
                 ", collation='" + collation + '\'' +
                 ", temporary=" + temporary +
                 '}';
+    }
+
+    public void dropIfExists()
+    {
+        this.addCommand("dropIfExists");
     }
 }

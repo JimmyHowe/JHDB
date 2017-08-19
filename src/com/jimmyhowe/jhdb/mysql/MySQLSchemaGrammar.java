@@ -153,5 +153,9 @@ public class MySQLSchemaGrammar extends SchemaGrammar
         return null;
     }
 
-
+    @Override
+    public String dropIfExists(Table table, String command, Connection connection)
+    {
+        return "DROP TABLE IF EXISTS " + table.getTableName();
+    }
 }

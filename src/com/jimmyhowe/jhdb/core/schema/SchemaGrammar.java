@@ -165,4 +165,13 @@ public abstract class SchemaGrammar extends BaseGrammar
      */
     @Nullable
     public abstract String compileTableExists(String table);
+
+    /**
+     * @param table Table name
+     * @param command    Command
+     * @param connection Connection
+     *
+     * @return Query String
+     */
+    public abstract String dropIfExists(Table table, String command, Connection connection);
 }

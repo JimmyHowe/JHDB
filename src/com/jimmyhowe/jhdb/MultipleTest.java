@@ -19,7 +19,7 @@ public class MultipleTest extends TestingEnvironment
         DB.register("second", new SQLitePlugin().inMemory());
 
         Schema.connections("first", "second")
-              .drop("users");
+              .dropIfExists("users");
 
         Schema.connections("first", "second")
               .create("users", new Blueprint()
