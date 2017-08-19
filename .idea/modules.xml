@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../ColorConsole/ColorConsole.iml" filepath="$PROJECT_DIR$/../ColorConsole/ColorConsole.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Dispatcher/Dispatcher.iml" filepath="$PROJECT_DIR$/../Dispatcher/Dispatcher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JHDB.iml" filepath="$PROJECT_DIR$/JHDB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Loggable/Loggable.iml" filepath="$PROJECT_DIR$/../Loggable/Loggable.iml" />
+    </modules>
+  </component>
+</project>

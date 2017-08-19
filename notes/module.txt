@@ -1,0 +1,8 @@
+
+
+
+
+    MySQL           Driver
+    Adapter         Contains Configurations
+    Connector       Makes Connection
+    Connection      Connection Wrapper
