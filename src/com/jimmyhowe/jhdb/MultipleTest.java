@@ -15,8 +15,8 @@ public class MultipleTest extends TestingEnvironment
     {
         InitializeTestingEnvironemt();
 
-        DB.register("first", new SQLitePlugin().setDatabase("first.sqlite"));
-        DB.register("second", new SQLitePlugin().setDatabase("second.sqlite"));
+        DB.register("first", new SQLitePlugin().inMemory());
+        DB.register("second", new SQLitePlugin().inMemory());
 
         Schema.connections("first", "second")
               .drop("users");

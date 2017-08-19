@@ -5,7 +5,7 @@ import com.jimmyhowe.jhdb.core.processors.TableProcessor;
 import com.jimmyhowe.jhdb.core.queries.components.AndWhere;
 import com.jimmyhowe.jhdb.core.queries.components.OrWhere;
 import com.jimmyhowe.jhdb.core.queries.components.Where;
-import com.jimmyhowe.jhdb.sqlite.SQLiteMemoryPlugin;
+import com.jimmyhowe.jhdb.sqlite.SQLitePlugin;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class QueryBuilderTest
 {
     @NotNull
-    private Plugin plugin = new SQLiteMemoryPlugin();
+    private Plugin plugin = new SQLitePlugin().inMemory();
 
     private QueryBuilder queryBuilder;
 

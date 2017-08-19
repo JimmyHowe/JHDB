@@ -1,8 +1,8 @@
 package com.jimmyhowe.jhdb.sqlite;
 
-import com.jimmyhowe.jhdb.core.Plugin;
 import com.jimmyhowe.jhdb.core.Connection;
 import com.jimmyhowe.jhdb.core.Connector;
+import com.jimmyhowe.jhdb.core.Plugin;
 import com.jimmyhowe.jhdb.core.queries.QueryGrammar;
 import com.jimmyhowe.jhdb.core.schema.SchemaGrammar;
 import org.jetbrains.annotations.NotNull;
@@ -22,12 +22,42 @@ public class SQLitePlugin implements Plugin
     private String prefix = "";
 
     /**
+     * Constructs with no parameters
+     */
+    public SQLitePlugin()
+    {
+
+    }
+
+    /**
+     * Constructs with database name
+     *
+     * @param database Database name
+     */
+    public SQLitePlugin(String database)
+    {
+        this.database = database;
+    }
+
+    /**
      * @return Driver String
      */
     @Override
     public @NotNull String getDriver()
     {
         return "org.sqlite.JDBC";
+    }
+
+    /**
+     * @param driver Driver string
+     *
+     * @return self
+     */
+    public SQLitePlugin setDriver(String driver)
+    {
+        this.driver = driver;
+
+        return this;
     }
 
     /**
@@ -82,18 +112,6 @@ public class SQLitePlugin implements Plugin
     }
 
     /**
-     * @param driver Driver string
-     *
-     * @return self
-     */
-    public SQLitePlugin setDriver(String driver)
-    {
-        this.driver = driver;
-
-        return this;
-    }
-
-    /**
      * @return Database name
      */
     public String getDatabase()
@@ -129,6 +147,18 @@ public class SQLitePlugin implements Plugin
     public SQLitePlugin setPrefix(String prefix)
     {
         this.prefix = prefix;
+
+        return this;
+    }
+
+    /**
+     * Use in memory database
+     *
+     * @return self
+     */
+    public SQLitePlugin inMemory()
+    {
+        this.database = ":memory:";
 
         return this;
     }
