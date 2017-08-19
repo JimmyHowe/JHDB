@@ -70,13 +70,13 @@ public class DB
     /**
      * This registers the default connection using the provided adapter and stores it in the list of connections.
      *
-     * @param adapter Connection Adapter
+     * @param plugin Connection Adapter
      *
      * @return The Connection
      */
-    public static Connection use(@NotNull Adapter adapter)
+    public static Connection use(@NotNull Plugin plugin)
     {
-        return register("default", adapter);
+        return register("default", plugin);
     }
 
     /**
@@ -84,18 +84,18 @@ public class DB
      * first connection then it stores the key as the default connection key.
      *
      * @param key     Connection Key
-     * @param adapter Connection Adapter
+     * @param plugin Connection Adapter
      *
      * @return The Connection
      */
-    public static Connection register(String key, @NotNull Adapter adapter)
+    public static Connection register(String key, @NotNull Plugin plugin)
     {
         if ( connections.isEmpty() )
         {
             defaultConnectionKey = key;
         }
 
-        connections.put(key, adapter.getConnection());
+        connections.put(key, plugin.getConnection());
 
         return connections.get(key);
     }

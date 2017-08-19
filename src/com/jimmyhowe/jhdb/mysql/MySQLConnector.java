@@ -1,6 +1,6 @@
 package com.jimmyhowe.jhdb.mysql;
 
-import com.jimmyhowe.jhdb.core.Adapter;
+import com.jimmyhowe.jhdb.core.Plugin;
 import com.jimmyhowe.jhdb.core.Connector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -16,9 +16,9 @@ import java.util.Properties;
  */
 public class MySQLConnector extends Connector
 {
-    public MySQLConnector(Adapter adapter)
+    public MySQLConnector(Plugin plugin)
     {
-        super(adapter);
+        super(plugin);
     }
 
     /**

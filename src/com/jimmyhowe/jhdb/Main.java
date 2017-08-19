@@ -2,7 +2,7 @@ package com.jimmyhowe.jhdb;
 
 import com.jimmyhowe.consolecolors.Console;
 import com.jimmyhowe.jhdb.core.DB;
-import com.jimmyhowe.jhdb.mysql.MySQLAdapter;
+import com.jimmyhowe.jhdb.mysql.MySQLPlugin;
 
 public class Main
 {
@@ -13,9 +13,9 @@ public class Main
             System.exit(0);
         });
 
-        MySQLAdapter mySQLAdapter = new MySQLAdapter();
+        MySQLPlugin mySQLPlugin = new MySQLPlugin();
 
-        DB.use(mySQLAdapter);
+        DB.use(mySQLPlugin);
 
 //        Schema.create("users", new Blueprint()
 //        {

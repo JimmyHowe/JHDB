@@ -1,6 +1,6 @@
 package com.jimmyhowe.jhdb.mysql;
 
-import com.jimmyhowe.jhdb.core.Adapter;
+import com.jimmyhowe.jhdb.core.Plugin;
 import com.jimmyhowe.jhdb.core.Connection;
 import com.jimmyhowe.jhdb.core.Connector;
 import org.jetbrains.annotations.NotNull;
@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Properties;
 
-public class MySQLAdapter extends Adapter
+public class MySQLPlugin extends Plugin
 {
     private String driver = "com.mysql.jdbc.Driver";
 
@@ -38,7 +38,7 @@ public class MySQLAdapter extends Adapter
     }
 
     @NotNull
-    public MySQLAdapter setDriver(String driver)
+    public MySQLPlugin setDriver(String driver)
     {
         this.driver = driver;
 
@@ -51,7 +51,7 @@ public class MySQLAdapter extends Adapter
     }
 
     @NotNull
-    public MySQLAdapter setHost(String host)
+    public MySQLPlugin setHost(String host)
     {
         this.host = host;
 
@@ -64,7 +64,7 @@ public class MySQLAdapter extends Adapter
     }
 
     @NotNull
-    public MySQLAdapter setPort(String port)
+    public MySQLPlugin setPort(String port)
     {
         this.port = port;
 
@@ -77,7 +77,7 @@ public class MySQLAdapter extends Adapter
     }
 
     @NotNull
-    public MySQLAdapter setDatabase(String database)
+    public MySQLPlugin setDatabase(String database)
     {
         this.database = database;
 
@@ -90,7 +90,7 @@ public class MySQLAdapter extends Adapter
     }
 
     @NotNull
-    public MySQLAdapter setUsername(String username)
+    public MySQLPlugin setUsername(String username)
     {
         this.username = username;
 
@@ -103,7 +103,7 @@ public class MySQLAdapter extends Adapter
     }
 
     @NotNull
-    public MySQLAdapter setPassword(String password)
+    public MySQLPlugin setPassword(String password)
     {
         this.password = password;
 
@@ -116,7 +116,7 @@ public class MySQLAdapter extends Adapter
     }
 
     @NotNull
-    public MySQLAdapter setCharset(String charset)
+    public MySQLPlugin setCharset(String charset)
     {
         this.charset = charset;
 
@@ -129,7 +129,7 @@ public class MySQLAdapter extends Adapter
     }
 
     @NotNull
-    public MySQLAdapter setCollation(String collation)
+    public MySQLPlugin setCollation(String collation)
     {
         this.collation = collation;
 
@@ -142,7 +142,7 @@ public class MySQLAdapter extends Adapter
     }
 
     @NotNull
-    public MySQLAdapter setPrefix(String prefix)
+    public MySQLPlugin setPrefix(String prefix)
     {
         this.prefix = prefix;
 
@@ -155,7 +155,7 @@ public class MySQLAdapter extends Adapter
     }
 
     @NotNull
-    public MySQLAdapter setStrict(boolean strict)
+    public MySQLPlugin setStrict(boolean strict)
     {
         this.strict = strict;
 
@@ -168,7 +168,7 @@ public class MySQLAdapter extends Adapter
     }
 
     @NotNull
-    public MySQLAdapter setEngine(String engine)
+    public MySQLPlugin setEngine(String engine)
     {
         this.engine = engine;
 

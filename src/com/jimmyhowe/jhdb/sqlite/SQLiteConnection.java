@@ -24,7 +24,7 @@
 
 package com.jimmyhowe.jhdb.sqlite;
 
-import com.jimmyhowe.jhdb.core.Adapter;
+import com.jimmyhowe.jhdb.core.Plugin;
 import com.jimmyhowe.jhdb.core.Connection;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,10 +34,10 @@ import org.jetbrains.annotations.NotNull;
 public class SQLiteConnection extends Connection
 {
     /**
-     * @param adapter Connection Adapter
+     * @param plugin Connection Adapter
      */
-    public SQLiteConnection(@NotNull Adapter adapter)
+    public SQLiteConnection(@NotNull Plugin plugin)
     {
-        super(adapter);
+        super(plugin);
     }
 }

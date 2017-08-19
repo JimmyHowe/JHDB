@@ -5,7 +5,7 @@ import com.jimmyhowe.jhdb.core.DB;
 import com.jimmyhowe.jhdb.core.schema.Blueprint;
 import com.jimmyhowe.jhdb.core.schema.Schema;
 import com.jimmyhowe.jhdb.core.schema.Table;
-import com.jimmyhowe.jhdb.sqlite.SQLiteAdapter;
+import com.jimmyhowe.jhdb.sqlite.SQLitePlugin;
 import com.jimmyhowe.support.collections.Collection;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,8 +15,8 @@ public class MultipleTest extends TestingEnvironment
     {
         InitializeTestingEnvironemt();
 
-        DB.register("first", new SQLiteAdapter().database("first.sqlite"));
-        DB.register("second", new SQLiteAdapter().database("second.sqlite"));
+        DB.register("first", new SQLitePlugin().database("first.sqlite"));
+        DB.register("second", new SQLitePlugin().database("second.sqlite"));
 
         Schema.connections("first", "second")
               .drop("users");

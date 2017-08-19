@@ -55,7 +55,7 @@ public abstract class Connection
      * The adapter used to make the connection.
      */
     @NotNull
-    private Adapter adapter;
+    private Plugin plugin;
 
     /**
      * Connector
@@ -118,14 +118,14 @@ public abstract class Connection
     private ExceptionHandler exceptionHandler = new ExceptionHandler();
 
     /**
-     * @param adapter Connection Adapter
+     * @param plugin Connection Adapter
      */
-    public Connection(@NotNull Adapter adapter)
+    public Connection(@NotNull Plugin plugin)
     {
-        this.adapter = adapter;
-        this.connector = adapter.getConnector();
-        this.schemaGrammar = adapter.getSchemaGrammar();
-        this.queryGrammar = adapter.getQueryGrammar();
+        this.plugin = plugin;
+        this.connector = plugin.getConnector();
+        this.schemaGrammar = plugin.getSchemaGrammar();
+        this.queryGrammar = plugin.getQueryGrammar();
     }
 
     /**
@@ -133,9 +133,9 @@ public abstract class Connection
      *
      * @param url
      */
-    private void connect(@NotNull Adapter url)
+    private void connect(@NotNull Plugin url)
     {
-        this.connection = this.connector.connect(adapter.getProperties());
+        this.connection = this.connector.connect(plugin.getProperties());
     }
 
     /**
@@ -158,7 +158,7 @@ public abstract class Connection
 
         if ( connection == null )
         {
-            connect(adapter);
+            connect(plugin);
         }
 
         long start = System.nanoTime();
@@ -329,9 +329,9 @@ public abstract class Connection
      * @return The connections Adapter
      */
     @NotNull
-    public Adapter getAdapter()
+    public Plugin getPlugin()
     {
-        return adapter;
+        return plugin;
     }
 
     /**

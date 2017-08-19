@@ -1,6 +1,6 @@
 package com.jimmyhowe.jhdb.sqlite;
 
-import com.jimmyhowe.jhdb.core.Adapter;
+import com.jimmyhowe.jhdb.core.Plugin;
 import com.jimmyhowe.jhdb.core.Connection;
 import com.jimmyhowe.jhdb.core.Connector;
 import com.jimmyhowe.jhdb.core.queries.QueryGrammar;
@@ -12,7 +12,7 @@ import java.util.Properties;
 /**
  * Created by Jimmy on 29/05/2017.
  */
-public class SQLiteAdapter extends Adapter
+public class SQLitePlugin extends Plugin
 {
     private String driver = "com.";
 
@@ -26,7 +26,7 @@ public class SQLiteAdapter extends Adapter
     }
 
     @NotNull
-    public SQLiteAdapter driver(String driver)
+    public SQLitePlugin driver(String driver)
     {
         this.driver = driver;
 
@@ -39,7 +39,7 @@ public class SQLiteAdapter extends Adapter
     }
 
     @NotNull
-    public SQLiteAdapter database(String database)
+    public SQLitePlugin database(String database)
     {
         this.database = database;
 
@@ -52,7 +52,7 @@ public class SQLiteAdapter extends Adapter
     }
 
     @NotNull
-    public SQLiteAdapter prefix(String prefix)
+    public SQLitePlugin prefix(String prefix)
     {
         this.prefix = prefix;
 

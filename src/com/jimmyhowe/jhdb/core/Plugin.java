@@ -10,7 +10,7 @@ import java.util.Properties;
 /**
  * Abstract Adapter
  */
-public abstract class Adapter
+public abstract class Plugin
 {
     /**
      * @return Driver String

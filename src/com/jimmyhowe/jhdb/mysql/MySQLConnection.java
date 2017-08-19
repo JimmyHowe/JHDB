@@ -24,7 +24,7 @@
 
 package com.jimmyhowe.jhdb.mysql;
 
-import com.jimmyhowe.jhdb.core.Adapter;
+import com.jimmyhowe.jhdb.core.Plugin;
 import com.jimmyhowe.jhdb.core.Connection;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,11 +38,11 @@ import java.sql.Statement;
 public class MySQLConnection extends Connection
 {
     /**
-     * @param adapter Connection Adapter
+     * @param plugin Connection Adapter
      */
-    public MySQLConnection(@NotNull Adapter adapter)
+    public MySQLConnection(@NotNull Plugin plugin)
     {
-        super(adapter);
+        super(plugin);
     }
 
     /**

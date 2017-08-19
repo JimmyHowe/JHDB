@@ -16,9 +16,9 @@ import java.util.Properties;
  */
 public abstract class Connector implements DetectsLostConnections, DetectsMissingDrivers, ReloadsDrivers
 {
-    private Adapter driver;
+    private Plugin driver;
 
-    public Connector(Adapter driver)
+    public Connector(Plugin driver)
     {
         this.driver = driver;
     }

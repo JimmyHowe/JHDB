@@ -1,7 +1,7 @@
 package com.jimmyhowe.jhdb.sqlite;
 
 import com.jimmyhowe.consolecolors.Console;
-import com.jimmyhowe.jhdb.core.Adapter;
+import com.jimmyhowe.jhdb.core.Plugin;
 import com.jimmyhowe.jhdb.core.Connector;
 import com.jimmyhowe.jhdb.core.exceptions.InvalidArgumentException;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +23,7 @@ public class SQLiteConnector extends Connector
     /**
      * @param driver SQLite Adapter
      */
-    public SQLiteConnector(Adapter driver)
+    public SQLiteConnector(Plugin driver)
     {
         super(driver);
     }
