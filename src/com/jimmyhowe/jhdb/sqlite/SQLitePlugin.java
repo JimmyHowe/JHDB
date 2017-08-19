@@ -82,11 +82,15 @@ public class SQLitePlugin implements Plugin
     }
 
     /**
-     * @param driver Driver String
+     * @param driver Driver string
+     *
+     * @return self
      */
-    public void setDriver(String driver)
+    public SQLitePlugin setDriver(String driver)
     {
         this.driver = driver;
+
+        return this;
     }
 
     /**
@@ -98,15 +102,19 @@ public class SQLitePlugin implements Plugin
     }
 
     /**
-     * @param database Database name
+     * @param database Database path
+     *
+     * @return self
      */
-    public void setDatabase(String database)
+    public SQLitePlugin setDatabase(String database)
     {
         this.database = database;
+
+        return this;
     }
 
     /**
-     * @return Table prefix
+     * @return Prefix string
      */
     public String getPrefix()
     {
@@ -114,10 +122,14 @@ public class SQLitePlugin implements Plugin
     }
 
     /**
-     * @param prefix Table prefix
+     * @param prefix Prefix string
+     *
+     * @return self
      */
-    public void setPrefix(String prefix)
+    public SQLitePlugin setPrefix(String prefix)
     {
         this.prefix = prefix;
+
+        return this;
     }
 }
