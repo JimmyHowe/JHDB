@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Properties;
 
-public class MySQLPlugin extends Plugin
+public class MySQLPlugin implements Plugin
 {
     private String driver = "com.mysql.jdbc.Driver";
 

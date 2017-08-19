@@ -12,7 +12,7 @@ import java.util.Properties;
 /**
  * Created by Jimmy on 29/05/2017.
  */
-public class SQLitePlugin extends Plugin
+public class SQLitePlugin implements Plugin
 {
     private String driver = "com.";
 

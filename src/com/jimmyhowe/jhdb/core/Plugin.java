@@ -8,43 +8,37 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Properties;
 
 /**
- * Abstract Adapter
+ * Plugin Interface
  */
-public abstract class Plugin
+public interface Plugin
 {
     /**
      * @return Driver String
      */
-    @NotNull
-    public abstract String getDriver();
+    @NotNull String getDriver();
 
     /**
      * @return A fresh Connection
      */
-    @NotNull
-    public abstract Connector getConnector();
+    @NotNull Connector getConnector();
 
     /**
      * @return A fresh Connection
      */
-    @NotNull
-    public abstract Connection getConnection();
+    @NotNull Connection getConnection();
 
     /**
      * @return A fresh Connection
      */
-    @Nullable
-    public abstract QueryGrammar getQueryGrammar();
+    @Nullable QueryGrammar getQueryGrammar();
 
     /**
      * @return A fresh Connection
      */
-    @Nullable
-    public abstract SchemaGrammar getSchemaGrammar();
+    @Nullable SchemaGrammar getSchemaGrammar();
 
     /**
      * @return Properties Object
      */
-    @Nullable
-    public abstract Properties getProperties();
+    @Nullable Properties getProperties();
 }
