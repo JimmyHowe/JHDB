@@ -13,7 +13,7 @@ public class MultipleTest extends TestingEnvironment
 {
     public static void main(String[] args)
     {
-        InitializeTestingEnvironemt();
+        InitializeTestingEnvironment();
 
         DB.flushConnections();
 

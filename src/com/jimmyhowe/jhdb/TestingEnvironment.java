@@ -6,7 +6,7 @@ import com.jimmyhowe.loggable.Log;
 
 public class TestingEnvironment
 {
-    static void InitializeTestingEnvironemt()
+    static void InitializeTestingEnvironment()
     {
         Log.onNote(Console::white);
         Log.onInfo(Console::cyan);
