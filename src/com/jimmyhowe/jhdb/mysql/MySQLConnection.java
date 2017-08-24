@@ -24,8 +24,8 @@
 
 package com.jimmyhowe.jhdb.mysql;
 
-import com.jimmyhowe.jhdb.core.Plugin;
 import com.jimmyhowe.jhdb.core.Connection;
+import com.jimmyhowe.jhdb.core.Plugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.PreparedStatement;

@@ -24,11 +24,11 @@
 
 package com.jimmyhowe.jhdb.core;
 
+import com.jimmyhowe.dispatcher.Dispatcher;
+import com.jimmyhowe.dispatcher.Listener;
 import com.jimmyhowe.jhdb.core.exceptions.InvalidArgumentException;
 import com.jimmyhowe.jhdb.core.queries.QueryBuilder;
 import com.jimmyhowe.jhdb.core.utilities.QueryLog;
-import com.jimmyhowe.dispatcher.Dispatcher;
-import com.jimmyhowe.dispatcher.Listener;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -137,8 +137,8 @@ public class DB
     /**
      * Flushes all the connections by iterating through the list of connections and closing them.
      *
-     * TODO: flush debug message cant be registered if there is no connection.
-     * TODO: Consider using only one log object on the DB facade, and tagging log messages with connection details.
+     * TODO: flush debug message cant be registered if there is no connection. TODO: Consider using only one log object
+     * on the DB facade, and tagging log messages with connection details.
      */
     public static void flushConnections()
     {

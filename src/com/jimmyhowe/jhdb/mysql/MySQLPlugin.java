@@ -1,8 +1,8 @@
 package com.jimmyhowe.jhdb.mysql;
 
-import com.jimmyhowe.jhdb.core.Plugin;
 import com.jimmyhowe.jhdb.core.Connection;
 import com.jimmyhowe.jhdb.core.Connector;
+import com.jimmyhowe.jhdb.core.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

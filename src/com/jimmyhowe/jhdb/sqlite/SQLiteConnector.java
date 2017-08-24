@@ -1,8 +1,8 @@
 package com.jimmyhowe.jhdb.sqlite;
 
 import com.jimmyhowe.colorconsole.Console;
-import com.jimmyhowe.jhdb.core.Plugin;
 import com.jimmyhowe.jhdb.core.Connector;
+import com.jimmyhowe.jhdb.core.Plugin;
 import com.jimmyhowe.jhdb.core.exceptions.InvalidArgumentException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -73,7 +73,8 @@ public class SQLiteConnector extends Connector
             if ( file.exists() )
             {
                 return file.getCanonicalPath();
-            } else {
+            } else
+            {
                 Console.cyan(file.getCanonicalPath() + " doesn't exist");
             }
 

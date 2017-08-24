@@ -167,7 +167,7 @@ public abstract class SchemaGrammar extends BaseGrammar
     public abstract String compileTableExists(String table);
 
     /**
-     * @param table Table name
+     * @param table      Table name
      * @param command    Command
      * @param connection Connection
      *
