@@ -1,6 +1,6 @@
 package com.jimmyhowe.jhdb.core.support;
 
-import com.jimmyhowe.consolecolors.Console;
+import com.jimmyhowe.colorconsole.Console;
 import com.jimmyhowe.jhdb.core.Plugin;
 import org.jetbrains.annotations.NotNull;
 

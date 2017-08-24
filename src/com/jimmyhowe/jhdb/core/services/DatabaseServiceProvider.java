@@ -1,6 +1,6 @@
 package com.jimmyhowe.jhdb.core.services;
 
-import com.jimmyhowe.consolecolors.Console;
+import com.jimmyhowe.colorconsole.Console;
 import com.jimmyhowe.jhdb.core.DB;
 
 public class DatabaseServiceProvider implements ServiceProvider

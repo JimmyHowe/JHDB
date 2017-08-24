@@ -1,6 +1,6 @@
 package com.jimmyhowe.jhdb;
 
-import com.jimmyhowe.consolecolors.Console;
+import com.jimmyhowe.colorconsole.Console;
 import com.jimmyhowe.jhdb.core.DB;
 import com.jimmyhowe.jhdb.mysql.MySQLPlugin;
 

@@ -1,6 +1,6 @@
 package com.jimmyhowe.jhdb;
 
-import com.jimmyhowe.consolecolors.Console;
+import com.jimmyhowe.colorconsole.Console;
 import com.jimmyhowe.jhdb.core.DB;
 import com.jimmyhowe.jhdb.core.schema.Blueprint;
 import com.jimmyhowe.jhdb.core.schema.Schema;
@@ -15,24 +15,22 @@ public class MultipleTest extends TestingEnvironment
     {
         InitializeTestingEnvironment();
 
-        DB.flushConnections();
+//        DB.flushConnections();
 
         DB.register("first", new SQLitePlugin().inMemory());
         DB.register("second", new SQLitePlugin().inMemory());
 
-        Schema.connections("first", "second")
-              .dropIfExists("users");
+        Schema.connections("first", "second").dropIfExists("users");
 
-        Schema.connections("first", "second")
-              .create("users", new Blueprint()
-              {
-                  @Override
-                  public void build(Table table)
-                  {
-                      table.increments("id");
-                      table.string("name");
-                  }
-              });
+        Schema.connections("first", "second").create("users", new Blueprint()
+        {
+            @Override
+            public void build(Table table)
+            {
+                table.increments("id");
+                table.string("name");
+            }
+        });
 
         @Nullable Collection first = DB.connection("first").table("users").get();
 

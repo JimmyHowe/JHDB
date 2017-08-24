@@ -24,7 +24,7 @@
 
 package com.jimmyhowe.jhdb.core;
 
-import com.jimmyhowe.consolecolors.Console;
+import com.jimmyhowe.colorconsole.Console;
 import com.jimmyhowe.jhdb.core.exceptions.ConnectionException;
 import com.jimmyhowe.jhdb.core.processors.PostProcessor;
 import com.jimmyhowe.jhdb.core.processors.TableProcessor;
