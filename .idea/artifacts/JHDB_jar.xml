@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="JHDB:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/JHDB_jar</output-path>
+    <root id="archive" name="JHDB.jar">
+      <element id="module-output" name="JHDB" />
+      <element id="module-output" name="Dispatcher" />
+      <element id="module-output" name="ColorConsole" />
+      <element id="module-output" name="Loggable" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Libraries/sqlite-jdbc-3.14.2.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/lib/junit-4.12.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/lib/hamcrest-core-1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Libraries/mysql-connector-java-5.1.38/mysql-connector-java-5.1.38-bin.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Support/out/artifacts/Support_jar/Support.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/plugins/junit/lib/junit-jupiter-api-5.0.0-M4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/plugins/junit/lib/opentest4j-1.0.0-M2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Libraries/mockito-all-1.10.19.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/redist/annotations-java8.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
