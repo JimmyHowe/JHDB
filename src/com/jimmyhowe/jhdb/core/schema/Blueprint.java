@@ -25,14 +25,18 @@
 package com.jimmyhowe.jhdb.core.schema;
 
 /**
- * Table Blueprint Callback
+ * The <tt>Schema.create(name, blueprint)</tt> method requires that a blueprint be passed through it containing the
+ * information required to build the table. The <tt>Table</tt> object is passed and used to build the actual table
+ * details.
  *
- * TODO Check if works with interface
+ * @author Jimmy Howe
+ * @see Schema
+ * @see Table
  */
-public abstract class Blueprint
+public interface Blueprint
 {
     /**
      * @param table Table Builder
      */
-    public abstract void build(Table table);
+    void build(Table table);
 }
