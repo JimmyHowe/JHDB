@@ -29,6 +29,7 @@ import com.jimmyhowe.dispatcher.Listener;
 import com.jimmyhowe.jhdb.core.exceptions.InvalidArgumentException;
 import com.jimmyhowe.jhdb.core.queries.QueryBuilder;
 import com.jimmyhowe.jhdb.core.utilities.QueryLog;
+import com.jimmyhowe.jhlog.Log;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -66,6 +67,11 @@ public class DB
      * Default Connection Key
      */
     private static String defaultConnectionKey;
+
+    /**
+     * DB Facade log
+     */
+    private static Log runningLog = new Log();
 
     /**
      * This registers the default connection using the provided adapter and stores it in the list of connections.
@@ -335,5 +341,13 @@ public class DB
     public static void onJdbcConnectionCreated(Listener listener)
     {
         dispatcher.listen("connector.created", listener);
+    }
+
+    /**
+     * @return DB Log
+     */
+    public static Log getRunningLog()
+    {
+        return runningLog;
     }
 }

@@ -183,7 +183,7 @@ public abstract class Connection
             DB.getDispatcher().dispatch("cant-connect");
         }
 
-        queryLog.logQuery(query, getElapsedTime(start));
+        queryLog.query(query, getElapsedTime(start));
 
         return this;
     }

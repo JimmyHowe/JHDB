@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/../Dispatcher/Dispatcher.iml" filepath="$PROJECT_DIR$/../Dispatcher/Dispatcher.iml" />
       <module fileurl="file://$PROJECT_DIR$/JHDB.iml" filepath="$PROJECT_DIR$/JHDB.iml" />
       <module fileurl="file://$PROJECT_DIR$/../Loggable/Loggable.iml" filepath="$PROJECT_DIR$/../Loggable/Loggable.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../jhlog/jhlog.iml" filepath="$PROJECT_DIR$/../jhlog/jhlog.iml" />
     </modules>
   </component>
 </project>

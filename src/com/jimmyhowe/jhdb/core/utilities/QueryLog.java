@@ -24,7 +24,7 @@
 
 package com.jimmyhowe.jhdb.core.utilities;
 
-import com.jimmyhowe.loggable.Log;
+import com.jimmyhowe.jhlog.Log;
 
 /**
  * Logs Queries
@@ -32,10 +32,10 @@ import com.jimmyhowe.loggable.Log;
 public class QueryLog extends Log
 {
     /**
-     * @param query       SQL Query
-     * @param elapsedTime Time in microseconds
+     * @param query       Query
+     * @param elapsedTime Elapsed time
      */
-    public void logQuery(String query, long elapsedTime)
+    public void query(String query, long elapsedTime)
     {
         note(String.format("> %s - %d microseconds", query, elapsedTime));
     }

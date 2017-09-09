@@ -26,16 +26,18 @@ package com.jimmyhowe.jhdb;
 
 import com.jimmyhowe.colorconsole.Console;
 import com.jimmyhowe.jhdb.core.DB;
-import com.jimmyhowe.loggable.Log;
+import com.jimmyhowe.jhdb.core.utilities.QueryLog;
 
 public class TestingEnvironment
 {
+    private static QueryLog testLog = new QueryLog();
+
     static void InitializeTestingEnvironment()
     {
-        Log.onNote(Console::white);
-        Log.onInfo(Console::cyan);
-        Log.onDebug(Console::yellow);
-        Log.onError(message -> Console.red(message.toUpperCase()));
+        testLog.onNote(Console::white);
+        testLog.onInfo(Console::cyan);
+        testLog.onDebug(Console::yellow);
+        testLog.onError(message -> Console.red(message.toUpperCase()));
 
         DB.onCantConnect(() -> {
             Console.red("Cant Connect to Database");

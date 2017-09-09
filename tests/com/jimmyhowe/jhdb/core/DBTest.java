@@ -22,24 +22,34 @@
  * SOFTWARE.
  */
 
-package com.jimmyhowe.jhdb.core.services;
+package com.jimmyhowe.jhdb.core;
 
-import com.jimmyhowe.colorconsole.Console;
-import com.jimmyhowe.jhdb.core.DB;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class DatabaseServiceProvider implements ServiceProvider
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class DBTest
 {
-    @Override
-    public void boot()
+    @BeforeEach
+    void setUp()
     {
-        DB.onCantConnect(() -> {
-            Console.red("Cant Connect ot Database !!!");
-            DB.getQueryLog().toConsole();
-            System.exit(0);
-        });
-
-        DB.onJdbcConnectionCreated(() -> {
-            Console.cyan("dasfdsfds");
-        });
     }
+
+    @Test
+    void testLogWorks()
+    {
+        DB.getRunningLog().info("info");
+        DB.getRunningLog().note("note");
+        DB.getRunningLog().debug("debug");
+        DB.getRunningLog().error("error");
+
+        assertEquals("info", DB.getRunningLog().getRawMessageAt(0));
+        assertEquals("note", DB.getRunningLog().getRawMessageAt(1));
+        assertEquals("debug", DB.getRunningLog().getRawMessageAt(2));
+        assertEquals("error", DB.getRunningLog().getRawMessageAt(3));
+
+        DB.getRunningLog().getLogEntries().forEach(logEntry -> System.out.println(logEntry.getMessage()));
+    }
+
 }

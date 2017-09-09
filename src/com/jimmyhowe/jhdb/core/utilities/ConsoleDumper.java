@@ -75,7 +75,7 @@ public class ConsoleDumper
      */
     public static void dumpQueryLog(@NotNull QueryLog queryLog)
     {
-        queryLog.asList().forEach(System.out::println);
+        queryLog.toConsole();
     }
 
 
