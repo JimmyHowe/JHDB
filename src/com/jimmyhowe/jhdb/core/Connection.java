@@ -147,7 +147,7 @@ public abstract class Connection
      */
     private void connect(@NotNull Plugin url)
     {
-        DB.getRunningLog().info("Connectin");
+        DB.getRunningLog().info("Attempting connection... (" + plugin.getDriver() + ")");
 
         this.connection = this.connector.connect(plugin.getProperties());
     }
