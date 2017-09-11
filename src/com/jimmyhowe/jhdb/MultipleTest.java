@@ -24,11 +24,10 @@
 
 package com.jimmyhowe.jhdb;
 
-import com.jimmyhowe.colorconsole.Console;
 import com.jimmyhowe.jhdb.core.DB;
 import com.jimmyhowe.jhdb.core.schema.Schema;
+import com.jimmyhowe.jhdb.core.tables.rows.Rows;
 import com.jimmyhowe.jhdb.sqlite.SQLitePlugin;
-import com.jimmyhowe.support.collections.Collection;
 import org.jetbrains.annotations.Nullable;
 
 public class MultipleTest extends TestingEnvironment
@@ -47,9 +46,13 @@ public class MultipleTest extends TestingEnvironment
             table.string("name");
         });
 
-        @Nullable Collection first = DB.connection("first").table("users").get();
+        DB.connection("first").table("users").insertInto("name").values("Jimmy");
+        DB.connection("first").table("users").insertInto("name").values("Brian");
 
-        Console.yellow(String.valueOf(first.count()));
+        @Nullable Rows firstTableEntries = DB.connection("first").table("users").get();
+
+        System.out.println(firstTableEntries.first());
+        System.out.println(firstTableEntries.last());
 
         DB.getRunningLog().toConsole();
     }
