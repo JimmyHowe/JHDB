@@ -118,9 +118,21 @@ public abstract class Connection
     private ExceptionHandler exceptionHandler = new ExceptionHandler();
 
     /**
-     * @param plugin Connection Adapter
+     * Instantiates the connection requiring the Plugin
+     *
+     * @param plugin Connection Plugin
      */
     public Connection(@NotNull Plugin plugin)
+    {
+        Initialize(plugin);
+    }
+
+    /**
+     * Initializes the Connection
+     *
+     * @param plugin Connection Plugin
+     */
+    private void Initialize(@NotNull Plugin plugin)
     {
         this.plugin = plugin;
         this.connector = plugin.getConnector();
@@ -135,6 +147,8 @@ public abstract class Connection
      */
     private void connect(@NotNull Plugin url)
     {
+        DB.getRunningLog().info("Connectin");
+
         this.connection = this.connector.connect(plugin.getProperties());
     }
 

@@ -48,8 +48,6 @@ class DBTest
         assertEquals("note", DB.getRunningLog().getRawMessageAt(1));
         assertEquals("debug", DB.getRunningLog().getRawMessageAt(2));
         assertEquals("error", DB.getRunningLog().getRawMessageAt(3));
-
-        DB.getRunningLog().getLogEntries().forEach(logEntry -> System.out.println(logEntry.getMessage()));
     }
 
 }

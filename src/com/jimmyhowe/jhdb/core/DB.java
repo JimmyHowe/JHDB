@@ -28,7 +28,6 @@ import com.jimmyhowe.dispatcher.Dispatcher;
 import com.jimmyhowe.dispatcher.Listener;
 import com.jimmyhowe.jhdb.core.exceptions.InvalidArgumentException;
 import com.jimmyhowe.jhdb.core.queries.QueryBuilder;
-import com.jimmyhowe.jhdb.core.utilities.QueryLog;
 import com.jimmyhowe.jhlog.Log;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -103,7 +102,7 @@ public class DB
 
         connections.put(key, plugin.getConnection());
 
-        DB.getQueryLog().info("Registered " + plugin.getClass().getSimpleName() + " plugin as '" + key + "'.");
+        DB.getRunningLog().info("Registered " + plugin.getClass().getSimpleName() + " plugin as '" + key + "'.");
 
         return connections.get(key);
     }
@@ -148,7 +147,7 @@ public class DB
      */
     public static void flushConnections()
     {
-        DB.getQueryLog().debug("Flushing connections.");
+        DB.getRunningLog().debug("Flushing connections.");
 
         DB.getDispatcher().dispatch("flushing");
 
@@ -269,13 +268,13 @@ public class DB
         getDefaultConnection().commitTransaction();
     }
 
-    /**
-     * @return The default connections query log.
-     */
-    public static QueryLog getQueryLog()
-    {
-        return getDefaultConnection().getQueryLog();
-    }
+//    /**
+//     * @return The default connections query log.
+//     */
+//    public static QueryLog getQueryLog()
+//    {
+//        return getDefaultConnection().getQueryLog();
+//    }
 
     /**
      * Outputs queries to the stdout before processing

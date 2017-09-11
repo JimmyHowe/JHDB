@@ -37,8 +37,6 @@ public class MultipleTest extends TestingEnvironment
     {
         InitializeTestingEnvironment();
 
-//        DB.flushConnections();
-
         DB.register("first", new SQLitePlugin().inMemory());
         DB.register("second", new SQLitePlugin().inMemory());
 
@@ -53,6 +51,6 @@ public class MultipleTest extends TestingEnvironment
 
         Console.yellow(String.valueOf(first.count()));
 
-        DB.getQueryLog().toConsole();
+        DB.getRunningLog().toConsole();
     }
 }

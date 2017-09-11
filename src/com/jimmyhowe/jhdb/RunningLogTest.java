@@ -22,26 +22,19 @@
  * SOFTWARE.
  */
 
-package com.jimmyhowe.jhdb.core.services;
+package com.jimmyhowe.jhdb;
 
 import com.jimmyhowe.colorconsole.Console;
 import com.jimmyhowe.jhdb.core.DB;
 
-public class DatabaseServiceProvider implements ServiceProvider
+public class RunningLogTest
 {
-    @Override
-    public void boot()
+    public static void main(String[] args)
     {
-        DB.getRunningLog().onInfo(Console::yellow);
+        DB.getRunningLog().onInfo(Console::red);
 
-        DB.onCantConnect(() -> {
-            Console.red("Cant Connect ot Database !!!");
-            DB.getRunningLog().toConsole();
-            System.exit(0);
-        });
+        DB.getRunningLog().info("hello world");
 
-        DB.onJdbcConnectionCreated(() -> {
-            Console.cyan("dasfdsfds");
-        });
+        DB.getRunningLog().toConsole();
     }
 }
