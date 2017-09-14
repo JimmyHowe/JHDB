@@ -41,8 +41,6 @@ import java.util.Map;
  */
 public class DB
 {
-    public static final String DEFAULT_CONNECTION_KEY = "default";
-
     /**
      * Outputs queries before performing
      */
@@ -59,6 +57,12 @@ public class DB
     public static Dispatcher dispatcher = new Dispatcher();
 
     /**
+     * List of Plugins
+     */
+    @NotNull
+    private static LinkedHashMap<String, Plugin> plugins = new LinkedHashMap<>();
+
+    /**
      * List of Connections
      */
     @NotNull
@@ -67,7 +71,7 @@ public class DB
     /**
      * Default Connection Key
      */
-    private static String defaultConnectionKey;
+    private static String defaultPluginKey;
 
     /**
      * DB Facade log
@@ -81,20 +85,19 @@ public class DB
      *
      * @return The Connection
      */
-    public static Connection use(@NotNull Plugin plugin)
+    public static Plugin use(@NotNull Plugin plugin)
     {
         return register("default", plugin);
     }
 
     /**
-     * This registers the default connection using the provided adapter class and store the instantiated object in the
-     * list of connections. Its just a better looking version of the use() function.
+     * Alias for use, but allows for passing of plugin class.
      *
      * @param pluginClass Class of the plugin
      *
      * @return The connection associated with the plugin
      */
-    public static Connection use(Class<? extends Plugin> pluginClass)
+    public static Plugin use(Class<? extends Plugin> pluginClass)
     {
         Plugin plugin = initializePlugin(pluginClass);
 
@@ -103,6 +106,55 @@ public class DB
         return use(plugin);
     }
 
+    /**
+     * @return The default plugin
+     */
+    public static Plugin getDefaultPlugin()
+    {
+        return plugins.get(defaultPluginKey);
+    }
+
+    /**
+     * This function registers the plugin inside the container and stores for future use.
+     *
+     * @param key    Plugin Key
+     * @param plugin Plugin Adapter
+     *
+     * @return The stored plugin
+     */
+    public static Plugin register(String key, @NotNull Plugin plugin)
+    {
+        if ( plugins.isEmpty() )
+        {
+            defaultPluginKey = key;
+        }
+
+        plugins.put(key, plugin);
+
+        DB.getRunningLog().info("Registered " + plugin.getClass().getSimpleName() + " plugin as '" + key + "'.");
+
+        return plugins.get(key);
+    }
+
+    public static void register(String key, Class<? extends Plugin> pluginClass)
+    {
+        Plugin plugin = initializePlugin(pluginClass);
+
+        if( plugins.isEmpty() )
+        {
+            defaultPluginKey = key;
+        }
+
+        plugins.put(key, plugin);
+
+        DB.getRunningLog().info("Registered " + plugin.getClass().getSimpleName() + " plugin as '" + key + "'.");
+    }
+
+    /**
+     * @param pluginClass Plugin Class
+     *
+     * @return New instance of plugin or null if error occurred
+     */
     private static Plugin initializePlugin(Class<? extends Plugin> pluginClass)
     {
         try
@@ -113,30 +165,15 @@ public class DB
             e.printStackTrace();
         }
 
-        return null;
+        throw new InvalidArgumentException("Plugin cannot be instantiated.");
     }
 
     /**
-     * This stores the connection from the adapter in the list of adapters but provides a lookup key. if this is the
-     * first connection then it stores the key as the default connection key.
-     *
-     * @param key    Connection Key
-     * @param plugin Connection Adapter
-     *
-     * @return The Connection
+     * @return The registered plugins
      */
-    public static Connection register(String key, @NotNull Plugin plugin)
+    public static @NotNull LinkedHashMap<String, Plugin> getRegisteredPlugins()
     {
-        if ( connections.isEmpty() )
-        {
-            defaultConnectionKey = key;
-        }
-
-        connections.put(key, plugin.getConnection());
-
-        DB.getRunningLog().info("Registered " + plugin.getClass().getSimpleName() + " plugin as '" + key + "'.");
-
-        return connections.get(key);
+        return plugins;
     }
 
     /**
@@ -163,12 +200,12 @@ public class DB
      */
     public static Connection getDefaultConnection()
     {
-        if ( ! connections.containsKey(defaultConnectionKey) )
+        if ( ! connections.containsKey(defaultPluginKey) )
         {
             throw new InvalidArgumentException("Default connection is not set.");
         }
 
-        return connections.get(defaultConnectionKey);
+        return connections.get(defaultPluginKey);
     }
 
     /**
@@ -222,9 +259,9 @@ public class DB
      *
      * @return Default Connection Key
      */
-    public static String getDefaultConnectionKey()
+    public static String getDefaultPluginKey()
     {
-        return defaultConnectionKey;
+        return defaultPluginKey;
     }
 
     /**
@@ -263,7 +300,6 @@ public class DB
     {
         return getDefaultConnection().update(query);
     }
-
     /**
      * Performs a DELETE statement.
      *
@@ -275,7 +311,6 @@ public class DB
     {
         return getDefaultConnection().delete(query);
     }
-
     /**
      * Begins a transaction on the default connection.
      */
@@ -283,7 +318,6 @@ public class DB
     {
         getDefaultConnection().beginTransaction();
     }
-
     /**
      * Rolls back a transaction on the default connection.
      */
@@ -291,7 +325,6 @@ public class DB
     {
         getDefaultConnection().rollbackTransaction();
     }
-
     /**
      * Commits a transaction on the default connection.
      */
@@ -299,11 +332,15 @@ public class DB
     {
         getDefaultConnection().commitTransaction();
     }
-    //        return getDefaultConnection().getQueryLog();
-    //    {
-    //    public static QueryLog getQueryLog()
     //     */
+
+    //    public static QueryLog getQueryLog()
+
+    //    {
+
     //     * @return The default connections query log.
+
+    //        return getDefaultConnection().getQueryLog();
 //    /**
 
 //    }
@@ -380,5 +417,23 @@ public class DB
     public static Log getRunningLog()
     {
         return runningLog;
+    }
+
+    public static Plugin getPlugin(String name)
+    {
+        return plugins.get(name);
+    }
+
+    public static Connection resolveConnectionFromPlugin(String plugin)
+    {
+        return getPlugin(plugin).getConnection();
+    }
+
+    /**
+     * Empties the plugins
+     */
+    public static void flushPlugins()
+    {
+        plugins = new LinkedHashMap<>();
     }
 }

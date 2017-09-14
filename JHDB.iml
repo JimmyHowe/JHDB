@@ -45,5 +45,6 @@
     <orderEntry type="library" name="sqlite-jdbc-3.14.2.1" level="project" />
     <orderEntry type="library" name="jhlog" level="project" />
     <orderEntry type="module" module-name="jhlog" scope="TEST" />
+    <orderEntry type="library" name="Tap" level="project" />
   </component>
 </module>
