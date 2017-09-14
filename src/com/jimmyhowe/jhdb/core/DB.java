@@ -85,6 +85,25 @@ public class DB
     }
 
     /**
+     * This registers the default connection using the provided adapter class and store the instantiated object in the
+     * list of connections. Its just a better looking version of the use() function.
+     *
+     * @param pluginClass Class of the plugin
+     *
+     * @return The connection associated with the plugin
+     */
+    public static Connection use(Class<? extends Plugin> pluginClass)
+    {
+        try
+        {
+            return register("default", pluginClass.newInstance());
+        } catch ( InstantiationException | IllegalAccessException e )
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * This stores the connection from the adapter in the list of adapters but provides a lookup key. if this is the
      * first connection then it stores the key as the default connection key.
      *
@@ -267,13 +286,13 @@ public class DB
     {
         getDefaultConnection().commitTransaction();
     }
-
+    //        return getDefaultConnection().getQueryLog();
+    //    {
+    //    public static QueryLog getQueryLog()
+    //     */
+    //     * @return The default connections query log.
 //    /**
-//     * @return The default connections query log.
-//     */
-//    public static QueryLog getQueryLog()
-//    {
-//        return getDefaultConnection().getQueryLog();
+
 //    }
 
     /**
