@@ -24,12 +24,12 @@ To register multiple plugins use the `DB.register(String, Plugin)` method.
     DB.register("sqlite", new SQLitePlugin())
     DB.register("sqlite.memory", new SQLitePlugin().inMemory()) 
 
-These can then be accesses via the `DB.connection("first")` method.
+These can then be accesses via the `DB.connection("mysql")` method.
 Most of the methods can be used via the `DB` or `connection` methods.
 For example:
 
     DB.select("SELECT * FROM users")
-    DB.connection("first").select("SELECT * FROM users")
+    DB.connection("mysql").select("SELECT * FROM users")
     
 With the first method using the default connection.
 
