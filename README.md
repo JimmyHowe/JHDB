@@ -6,9 +6,9 @@ Includes
 - MySQL Connector 5.1.38
 - SQLite 3.14.2.1
 
-## Usage
+# Usage
 
-# Registering Plugins
+## Registering Plugins
 
 SO far there are only two plugins MySQL and SQLite. To register the plugins simple use the `DB.use(Plugin)` method.
 
