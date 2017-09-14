@@ -72,6 +72,16 @@ public class SQLiteSchemaGrammar extends SchemaGrammar
     }
 
     /**
+     * @param table
+     *
+     * @return
+     */
+    private String addPrimaryKeys(Table table)
+    {
+        return "";
+    }
+
+    /**
      * Compiles a drop table query.
      *
      * @param table      Table Blueprint
@@ -84,16 +94,6 @@ public class SQLiteSchemaGrammar extends SchemaGrammar
     public String drop(@NotNull Table table, String command, Connection connection)
     {
         return "DROP TABLE " + table.getTableName();
-    }
-
-    /**
-     * @param table
-     *
-     * @return
-     */
-    private String addPrimaryKeys(Table table)
-    {
-        return "";
     }
 
     /**

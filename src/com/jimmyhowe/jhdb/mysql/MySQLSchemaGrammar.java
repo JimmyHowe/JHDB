@@ -60,14 +60,14 @@ public class MySQLSchemaGrammar extends SchemaGrammar
         return sql;
     }
 
-    private Object addPrimaryKeys(@NotNull Table table)
-    {
-        return ", PRIMARY KEY (id)";
-    }
-
     private Object addForeignKeys(@NotNull Table table)
     {
         return "";
+    }
+
+    private Object addPrimaryKeys(@NotNull Table table)
+    {
+        return ", PRIMARY KEY (id)";
     }
 
     /**
@@ -80,38 +80,9 @@ public class MySQLSchemaGrammar extends SchemaGrammar
      * @return SQL Statement
      */
     @NotNull
-    @Override
     public String drop(@NotNull Table table, String command, Connection connection)
     {
         return "DROP TABLE " + table.getTableName();
-    }
-
-    @Nullable
-    @Override
-    protected String compileBoolean(Column column)
-    {
-        return null;
-    }
-
-    @Nullable
-    @Override
-    protected String compileBinary(Column column)
-    {
-        return null;
-    }
-
-    /**
-     * Compiles a timestamp column.
-     *
-     * @param column Column
-     *
-     * @return compiled column
-     */
-    @Nullable
-    @Override
-    protected String compileTimestamp(Column column)
-    {
-        return null;
     }
 
     /**
@@ -135,6 +106,34 @@ public class MySQLSchemaGrammar extends SchemaGrammar
         return builder.toString();
     }
 
+    /**
+     * Compiles a timestamp column.
+     *
+     * @param column Column
+     *
+     * @return compiled column
+     */
+    @NotNull
+    @Override
+    protected String compileTimestamp(@NotNull Column column)
+    {
+        return column.getName() + " " + getTimestampType();
+    }
+
+    @NotNull
+    @Override
+    protected String compileBoolean(@NotNull Column column)
+    {
+        return column.getName() + " " + getBooleanType(column);
+    }
+
+    @NotNull
+    @Override
+    protected String compileBinary(@NotNull Column column)
+    {
+        return wrap(column.getName()) + " " + getBinaryType(column);
+    }
+
     @NotNull
     @Override
     protected String getStringType(Column column)
@@ -146,25 +145,34 @@ public class MySQLSchemaGrammar extends SchemaGrammar
         return "VARCHAR(" + 255 + ")";
     }
 
-    @Nullable
+    @NotNull
     @Override
     protected String getBinaryType(Column column)
     {
-        return null;
+        return "BLOB";
     }
 
-    @Nullable
+    @NotNull
     @Override
     protected String getBooleanType(Column column)
     {
-        return null;
+        return "TINYINT(1)";
+    }
+
+    /**
+     * @return Timestamp Type
+     */
+    @NotNull
+    protected String getTimestampType()
+    {
+        return "DATETIME DEFAULT CURRENT_TIMESTAMP";
     }
 
     @Nullable
     @Override
     public String compileTableExists(String table)
     {
-        return null;
+        return "SELECT * FROM sqlite_master WHERE type = 'table' AND name = " + wrapTable(table);
     }
 
     @Override

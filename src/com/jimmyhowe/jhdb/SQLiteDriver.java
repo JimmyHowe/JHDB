@@ -42,6 +42,9 @@ public class SQLiteDriver
         Schema.create("users", table -> {
             table.increments("id");
             table.string("name");
+            table.string("email", 255).nullable();
+            table.bool("activated").nullable();
+            table.timestamps();
         });
 
         DB.table("users").insertInto("name").values("Jimmy");
