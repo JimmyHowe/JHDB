@@ -8,11 +8,34 @@ Includes
 
 ## Usage
 
-### Single Connection
+# Registering Plugins
 
-    DB.use(new MySQLAdapter("database", "username", "password"))
+SO far there are only two plugins MySQL and SQLite. To register the plugins simple use the `DB.use(Plugin)` method.
+
+    DB.use(new MySQLPlugin())
+    DB.use(new SQLitePlugin())
+    DB.use(new SQLitePlugin().inMemory())
+    
+This sets the default plugin to be used when creating connections to the databases.
+
+To register multiple plugins use the `DB.register(String, Plugin)` method.
+
+    DB.register("mysql", new MySQLPlugin())
+    DB.register("sqlite", new SQLitePlugin())
+    DB.register("sqlite.memory", new SQLitePlugin().inMemory()) 
+
+These can then be accesses via the `DB.connection("first")` method.
+Most of the methods can be used via the `DB` or `connection` methods.
+For example:
+
+    DB.select("SELECT * FROM users")
+    DB.connection("first").select("SELECT * FROM users")
+    
+With the first method using the default connection.
 
 ## Creating Tables
+
+The `Schema` object is used to manipulate and create tables.
 
     Schema.create("users", new Blueprint()
     {
@@ -28,44 +51,49 @@ Includes
         }
     });
     
-## Migrator
+With Java 8 this can be shortened to
 
-    Migrator.add(new Migration()
-    {
-        @Override
-        public void up()
-        {
-            Schema.create("users", new Blueprint()
-            {
-                @Override
-                public void build(Table table)
-                {
-                    table.increments("id");
-                    table.string("name");
-                    table.integer("age").unsigned();
-                }
-            });
-        }
+    Schema.create("users", table -> {
+            table.increments("id");
+            table.string("name");
+            table.string("email", 255);
+            table.bool("activated").nullable();
+            table.softDeletes();
+            table.timestamps();
+        });
+    
+The schema builder can be used on specific connections like so
 
-        @Override
-        public void down()
-        {
-            Schema.drop("users");
-        }
-    });
-
-## Queries
+    Schema.connection("sqlite").create(...)
 
 ### Direct SQL
 
-    DB.select("...") // Returns ResultSet
-    DB.insert("...") // Returns number of rows affected
-    DB.update("...") // Returns number of rows affected
-    DB.delete("...") // Returns number of rows affected
+To run direct SQL queries on a connection simple use the helper methods.
+
+Selects will return ResultSets
+
+    DB.select("...")
+    DB.connection("sqlite").select("...")
     
+Inserts will return boolean values to let you know if it worked
+    
+    DB.insert("...")
+    DB.connection("sqlite").insert("...")
+
+Update and delete methods return the number of rows affected.
+    
+    DB.update("...")
+    DB.connection("sqlite").update("...")
+    DB.delete("...")
+    DB.connection("sqlite").delete("...")
+
 ### Query Builder
 
+The query builder has many methods to simplify sql queries. and can be accessed on specific connections. 
+
     DB.table("users")
+    DB.table("users", "sqlite")
+    DB.connection("sqlite").table("users")
     
 #### Selects
 
@@ -101,13 +129,32 @@ Includes
     DB.table("users").orderBy("name").get()
     DB.table("users").orderByDesc("name").get()
 
-### Multiple Connections
+## Migrator
 
-    DB.register("mysql", new MySQLAdapter("database", "username", "password"))
-    DB.register("sqlite", new SQLiteAdapter("database.db"))
-    DB.register("sqlite.memory", new SQLiteMemoryAdapter())
+The Migrator can be used for migrating tables up and down. This feature is pretty simple at the moment.
+
+    Migrator.add(new Migration()
+    {
+        @Override
+        public void up()
+        {
+            Schema.create("users", new Blueprint()
+            {
+                @Override
+                public void build(Table table)
+                {
+                    table.increments("id");
+                    table.string("name");
+                    table.integer("age").unsigned();
+                }
+            });
+        }
+
+        @Override
+        public void down()
+        {
+            Schema.drop("users");
+        }
+    });
     
-    Schema.connection("sqlite")
     
-    DB.connection("sqlite")
-    DB.table("users", "sqlite")
