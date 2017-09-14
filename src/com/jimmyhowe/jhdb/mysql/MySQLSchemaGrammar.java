@@ -46,15 +46,28 @@ public class MySQLSchemaGrammar extends SchemaGrammar
      *
      * @return SQL Statement
      */
-    @NotNull
-    @Override
     public String create(@NotNull Table table, String command, Connection connection)
     {
-        String sql = "CREATE TABLE " + table.getTableName();
-
-        sql += " (" + Str.toCsv(compileColumns(table)) + ")";
+        String sql = String.format(
+                "%s TABLE %s (%s%s%s)",
+                table.temporary ? "CREATE TEMPORARY" : "CREATE",
+                this.wrapTable(table.getTableName()),
+                Str.toCsv(compileColumns(table)),
+                this.addForeignKeys(table),
+                this.addPrimaryKeys(table)
+        );
 
         return sql;
+    }
+
+    private Object addPrimaryKeys(@NotNull Table table)
+    {
+        return ", PRIMARY KEY (id)";
+    }
+
+    private Object addForeignKeys(@NotNull Table table)
+    {
+        return "";
     }
 
     /**
@@ -115,8 +128,8 @@ public class MySQLSchemaGrammar extends SchemaGrammar
 
         builder.append(" ").append("INT");
         if ( column.isUnsigned() ) builder.append(" UNSIGNED");
-        if ( ! column.isNullable() ) builder.append(" NOT NULL");
         if ( column.isAutoIncrements() ) builder.append(" AUTO_INCREMENT");
+        if ( ! column.isNullable() ) builder.append(" NOT NULL");
         if ( column.isUnique() ) builder.append(" UNIQUE");
 
         return builder.toString();
@@ -126,10 +139,11 @@ public class MySQLSchemaGrammar extends SchemaGrammar
     @Override
     protected String getStringType(Column column)
     {
-        // TODO: FiX
+        // TODO: Fix this!!
+
 //        return "VARCHAR(" + column.getParameter("length") + ")";
 
-        return "";
+        return "VARCHAR(" + 255 + ")";
     }
 
     @Nullable

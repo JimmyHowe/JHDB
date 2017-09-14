@@ -137,7 +137,8 @@ public abstract class SchemaGrammar extends BaseGrammar
     @NotNull
     protected String compileString(@NotNull Column column)
     {
-        StringBuilder builder = new StringBuilder(this.wrap(column.getName()));
+//        StringBuilder builder = new StringBuilder(this.wrap(column.getName()));
+        StringBuilder builder = new StringBuilder(column.getName());
 
         builder.append(" ").append(this.getStringType(column));
 

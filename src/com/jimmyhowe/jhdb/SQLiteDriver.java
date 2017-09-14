@@ -24,45 +24,31 @@
 
 package com.jimmyhowe.jhdb;
 
-import com.jimmyhowe.colorconsole.Console;
 import com.jimmyhowe.jhdb.core.DB;
-import com.jimmyhowe.jhdb.mysql.MySQLPlugin;
+import com.jimmyhowe.jhdb.core.schema.Schema;
+import com.jimmyhowe.jhdb.core.utilities.ConsoleDumper;
+import com.jimmyhowe.jhdb.sqlite.SQLitePlugin;
 
-public class Main
+import java.sql.ResultSet;
+
+public class SQLiteDriver
 {
     public static void main(String[] args)
     {
-        DB.onCantConnect(() -> {
-            Console.red("Cant Connect to Database");
-            System.exit(0);
-        });
-
-        MySQLPlugin mySQLPlugin = new MySQLPlugin();
-
-        DB.use(mySQLPlugin);
-
-//        Schema.create("users", new Blueprint()
-//        {
-//            @Override
-//            public void build(Table table)
-//            {
-//                table.increments("id");
-//                table.string("name");
-//            }
-//        });
+        DB.use(new SQLitePlugin());
 
         DB.execute("DROP TABLE users");
 
-        DB.execute(
-                "CREATE TABLE users (id INT UNSIGNED NOT NULL AUTO_INCREMENT, name VARCHAR(50) NOT NULL, PRIMARY KEY (id))");
+        Schema.create("users", table -> {
+            table.increments("id");
+            table.string("name");
+        });
 
-        DB.select("SELECT * FROM users");
+        DB.table("users").insertInto("name").values("Jimmy");
+        DB.table("users").insertInto("name").values("Twig");
 
-//        int result = DB.table("users").insertInto("name").values("JimmyHowe");
+        ResultSet results = DB.select("SELECT * FROM users");
 
-//        System.out.println(result);
-
-        DB.getDefaultConnection().getQueryLog().toConsole();
-        DB.getRunningLog().toConsole();
+        ConsoleDumper.dumpResultSet(results);
     }
 }

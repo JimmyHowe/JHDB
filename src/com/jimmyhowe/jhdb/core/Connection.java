@@ -24,7 +24,6 @@
 
 package com.jimmyhowe.jhdb.core;
 
-import com.jimmyhowe.colorconsole.Console;
 import com.jimmyhowe.jhdb.core.exceptions.ConnectionException;
 import com.jimmyhowe.jhdb.core.processors.PostProcessor;
 import com.jimmyhowe.jhdb.core.processors.TableProcessor;
@@ -163,7 +162,7 @@ public abstract class Connection
     @NotNull
     public Connection run(@Nullable String query, @NotNull RunCallback callback)
     {
-        Console.white("DB.run : " + query);
+        System.out.println(query);
 
         if ( query == null )
         {
@@ -183,9 +182,6 @@ public abstract class Connection
         {
             try
             {
-                Console.blue(String.valueOf(connection.isClosed()));
-
-                Console.yellow(connection.toString());
                 Statement statement = getStatement(query);
                 callback.run(this, statement);
             } catch ( SQLException e )

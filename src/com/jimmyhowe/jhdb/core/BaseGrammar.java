@@ -74,7 +74,8 @@ public abstract class BaseGrammar
     @NotNull
     public String wrapTable(String table)
     {
-        return wrap(tablePrefix + table, true);
+//        return wrap(tablePrefix + table, true);
+        return tablePrefix + table;
     }
 
     /**
@@ -228,6 +229,7 @@ public abstract class BaseGrammar
         if ( ! Objects.equals(value, "*") )
         {
             return "\"" + value.replace("\"", "\"\"") + "\"";
+//            return "`" + value.replace("\"", "\"\"") + "`";
         }
 
         return value;

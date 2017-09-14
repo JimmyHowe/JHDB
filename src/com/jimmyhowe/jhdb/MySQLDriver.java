@@ -24,45 +24,35 @@
 
 package com.jimmyhowe.jhdb;
 
-import com.jimmyhowe.colorconsole.Console;
 import com.jimmyhowe.jhdb.core.DB;
+import com.jimmyhowe.jhdb.core.schema.Schema;
+import com.jimmyhowe.jhdb.core.utilities.ConsoleDumper;
 import com.jimmyhowe.jhdb.mysql.MySQLPlugin;
 
-public class Main
+import java.sql.ResultSet;
+
+public class MySQLDriver
 {
     public static void main(String[] args)
     {
-        DB.onCantConnect(() -> {
-            Console.red("Cant Connect to Database");
-            System.exit(0);
+        DB.use(new MySQLPlugin());
+
+        DB.execute("DROP TABLE IF EXISTS users");
+
+//        DB.execute("CREATE TABLE users (id INT UNSIGNED AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY (id))");
+
+        Schema.create("users", table -> {
+            table.increments("id");
+            table.string("name");
         });
 
-        MySQLPlugin mySQLPlugin = new MySQLPlugin();
+        DB.table("users").insertInto("name").values("Jimmy");
+        DB.table("users").insertInto("name").values("Twig");
 
-        DB.use(mySQLPlugin);
+        ResultSet results = DB.select("SELECT * FROM users");
 
-//        Schema.create("users", new Blueprint()
-//        {
-//            @Override
-//            public void build(Table table)
-//            {
-//                table.increments("id");
-//                table.string("name");
-//            }
-//        });
-
-        DB.execute("DROP TABLE users");
-
-        DB.execute(
-                "CREATE TABLE users (id INT UNSIGNED NOT NULL AUTO_INCREMENT, name VARCHAR(50) NOT NULL, PRIMARY KEY (id))");
-
-        DB.select("SELECT * FROM users");
-
-//        int result = DB.table("users").insertInto("name").values("JimmyHowe");
-
-//        System.out.println(result);
+        ConsoleDumper.dumpResultSet(results);
 
         DB.getDefaultConnection().getQueryLog().toConsole();
-        DB.getRunningLog().toConsole();
     }
 }
