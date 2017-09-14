@@ -41,6 +41,8 @@ import java.util.Map;
  */
 public class DB
 {
+    public static final String DEFAULT_CONNECTION_KEY = "default";
+
     /**
      * Outputs queries before performing
      */
@@ -94,13 +96,24 @@ public class DB
      */
     public static Connection use(Class<? extends Plugin> pluginClass)
     {
+        Plugin plugin = initializePlugin(pluginClass);
+
+        assert plugin != null;
+
+        return use(plugin);
+    }
+
+    private static Plugin initializePlugin(Class<? extends Plugin> pluginClass)
+    {
         try
         {
-            return register("default", pluginClass.newInstance());
+            return pluginClass.newInstance();
         } catch ( InstantiationException | IllegalAccessException e )
         {
             e.printStackTrace();
         }
+
+        return null;
     }
 
     /**
