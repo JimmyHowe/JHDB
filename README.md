@@ -62,9 +62,10 @@ With Java 8 this can be shortened to
             table.timestamps();
         });
     
-The schema builder can be used on specific connections like so
+The schema builder can be used on one or more connections like so
 
     Schema.connection("sqlite").create(...)
+    Schema.connections("mysql", sqlite").create(...)
 
 ### Direct SQL
 
