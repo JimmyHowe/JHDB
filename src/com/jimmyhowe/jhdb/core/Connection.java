@@ -363,16 +363,16 @@ public abstract class Connection
      */
     public void closeConnection()
     {
-        if ( connection != null )
-        {
-            try
-            {
-                connection.close();
-            } catch ( SQLException e )
-            {
-                e.printStackTrace();
-            }
-        }
+//        if ( connection != null )
+//        {
+//            try
+//            {
+//                connection.close();
+//            } catch ( SQLException e )
+//            {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     /**

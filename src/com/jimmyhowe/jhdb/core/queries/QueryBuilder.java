@@ -28,6 +28,7 @@ import com.jimmyhowe.colorconsole.Console;
 import com.jimmyhowe.jhdb.core.Connection;
 import com.jimmyhowe.jhdb.core.processors.PostProcessor;
 import com.jimmyhowe.jhdb.core.queries.components.*;
+import com.jimmyhowe.jhdb.core.tables.rows.Rows;
 import com.jimmyhowe.jhdb.core.utilities.Expression;
 import com.jimmyhowe.support.collections.Collection;
 import com.jimmyhowe.support.stores.KeyValueStore;
@@ -417,7 +418,7 @@ public class QueryBuilder
      */
     @Nullable
     @SuppressWarnings("unchecked")
-    public <T extends Collection> T get(String... columns)
+    public Rows get(String... columns)
     {
         List<String> original = this.columns;
 
@@ -426,15 +427,11 @@ public class QueryBuilder
             this.columns = Arrays.asList(columns);
         }
 
-//        ResultSet results = this.processor.processSelect(this, this.runSelect());
-
         ResultSet results = this.runSelect();
-
-//        System.out.println(results);
 
         this.columns = original;
 
-        return (T) this.processor.collection(results);
+        return this.processor.collection(results);
     }
 
     /**

@@ -37,7 +37,7 @@ import java.sql.SQLException;
 /**
  * Processes ResultSet's into Row and Rows Objects
  */
-public class TableProcessor extends PostProcessor<Row, Rows>
+public class TableProcessor extends PostProcessor
 {
     /**
      * Returns a single record

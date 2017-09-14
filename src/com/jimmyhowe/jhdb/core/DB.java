@@ -69,7 +69,7 @@ public class DB
     private static LinkedHashMap<String, Connection> connections = new LinkedHashMap<>();
 
     /**
-     * Default Connection Key
+     * Default Plugin Key
      */
     private static String defaultPluginKey;
 
@@ -136,11 +136,18 @@ public class DB
         return plugins.get(key);
     }
 
-    public static void register(String key, Class<? extends Plugin> pluginClass)
+    /**
+     * This function registers the plugin inside the container and stores for future use.
+     *
+     * Cleaner usage.
+     *  @param key         Plugin Key
+     * @param pluginClass Class of plugin for instantiation
+     */
+    public static Plugin register(String key, Class<? extends Plugin> pluginClass)
     {
         Plugin plugin = initializePlugin(pluginClass);
 
-        if( plugins.isEmpty() )
+        if ( plugins.isEmpty() )
         {
             defaultPluginKey = key;
         }
@@ -148,6 +155,8 @@ public class DB
         plugins.put(key, plugin);
 
         DB.getRunningLog().info("Registered " + plugin.getClass().getSimpleName() + " plugin as '" + key + "'.");
+
+        return plugin;
     }
 
     /**
@@ -183,12 +192,27 @@ public class DB
      */
     public static Connection connection(String key)
     {
+        if ( ! hasPlugin(key) )
+        {
+            throw new InvalidArgumentException("Plugin '" + key + "' does not exist.");
+        }
+
         if ( ! connections.containsKey(key) )
         {
             throw new InvalidArgumentException("Connection '" + key + "' does not exist.");
         }
 
         return connections.get(key);
+    }
+
+    /**
+     * @param key Plugin key
+     *
+     * @return true or false if plugin exists
+     */
+    private static boolean hasPlugin(String key)
+    {
+        return plugins.containsKey(key);
     }
 
     /**
@@ -200,12 +224,12 @@ public class DB
      */
     public static Connection getDefaultConnection()
     {
-        if ( ! connections.containsKey(defaultPluginKey) )
+        if ( ! plugins.containsKey(defaultPluginKey) )
         {
-            throw new InvalidArgumentException("Default connection is not set.");
+            throw new InvalidArgumentException("Default plugin is not set.");
         }
 
-        return connections.get(defaultPluginKey);
+        return plugins.get(defaultPluginKey).getConnection();
     }
 
     /**
@@ -300,6 +324,7 @@ public class DB
     {
         return getDefaultConnection().update(query);
     }
+
     /**
      * Performs a DELETE statement.
      *
@@ -311,6 +336,7 @@ public class DB
     {
         return getDefaultConnection().delete(query);
     }
+
     /**
      * Begins a transaction on the default connection.
      */
@@ -318,6 +344,7 @@ public class DB
     {
         getDefaultConnection().beginTransaction();
     }
+
     /**
      * Rolls back a transaction on the default connection.
      */
@@ -325,6 +352,7 @@ public class DB
     {
         getDefaultConnection().rollbackTransaction();
     }
+
     /**
      * Commits a transaction on the default connection.
      */

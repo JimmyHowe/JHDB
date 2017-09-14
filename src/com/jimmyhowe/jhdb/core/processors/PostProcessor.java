@@ -24,7 +24,8 @@
 
 package com.jimmyhowe.jhdb.core.processors;
 
-import com.jimmyhowe.support.collections.Collection;
+import com.jimmyhowe.jhdb.core.tables.rows.Row;
+import com.jimmyhowe.jhdb.core.tables.rows.Rows;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,11 +37,8 @@ import java.sql.SQLException;
  *
  * The Post Processor is used to process the results of the ResultSet into a single object or a collection of objects
  * for multiple rows.
- *
- * @param <S> Single Row Object
- * @param <C> Collection Object
  */
-public abstract class PostProcessor<S, C extends Collection<S>>
+public abstract class PostProcessor
 {
     /**
      * Returns a single record
@@ -50,7 +48,7 @@ public abstract class PostProcessor<S, C extends Collection<S>>
      * @return Single Instance
      */
     @Nullable
-    public S single(ResultSet resultSet)
+    public Row single(ResultSet resultSet)
     {
         try
         {
@@ -73,7 +71,7 @@ public abstract class PostProcessor<S, C extends Collection<S>>
      * @throws SQLException When can retrieve results
      */
     @NotNull
-    public abstract S processSingle(ResultSet resultSet) throws SQLException;
+    public abstract Row processSingle(ResultSet resultSet) throws SQLException;
 
     /**
      * Returns a collection of records
@@ -83,7 +81,7 @@ public abstract class PostProcessor<S, C extends Collection<S>>
      * @return Collection Instance
      */
     @Nullable
-    public C collection(ResultSet resultSet)
+    public Rows collection(@NotNull ResultSet resultSet)
     {
         try
         {
@@ -112,5 +110,5 @@ public abstract class PostProcessor<S, C extends Collection<S>>
      * @throws SQLException When can retrieve results
      */
     @NotNull
-    public abstract C processCollection(ResultSet resultSet) throws SQLException;
+    public abstract Rows processCollection(ResultSet resultSet) throws SQLException;
 }
