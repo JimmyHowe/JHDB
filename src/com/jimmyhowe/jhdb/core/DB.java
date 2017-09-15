@@ -140,7 +140,8 @@ public class DB
      * This function registers the plugin inside the container and stores for future use.
      *
      * Cleaner usage.
-     *  @param key         Plugin Key
+     *
+     * @param key         Plugin Key
      * @param pluginClass Class of plugin for instantiation
      */
     public static Plugin register(String key, Class<? extends Plugin> pluginClass)

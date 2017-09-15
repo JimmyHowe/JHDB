@@ -30,7 +30,6 @@ import com.jimmyhowe.jhdb.core.processors.TableProcessor;
 import com.jimmyhowe.jhdb.core.queries.QueryBuilder;
 import com.jimmyhowe.jhdb.core.queries.QueryGrammar;
 import com.jimmyhowe.jhdb.core.schema.SchemaGrammar;
-import com.jimmyhowe.jhdb.core.support.ExceptionHandler;
 import com.jimmyhowe.jhdb.core.support.RunCallback;
 import com.jimmyhowe.jhdb.core.utilities.QueryLog;
 import org.jetbrains.annotations.NotNull;
@@ -109,12 +108,6 @@ public abstract class Connection
      * Don't hit the DB
      */
     private boolean pretend = false;
-
-    /**
-     * Exception Handler
-     */
-    @NotNull
-    private ExceptionHandler exceptionHandler = new ExceptionHandler();
 
     /**
      * Instantiates the connection requiring the Plugin
