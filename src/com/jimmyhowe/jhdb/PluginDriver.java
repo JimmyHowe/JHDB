@@ -24,27 +24,19 @@
 
 package com.jimmyhowe.jhdb;
 
-import com.jimmyhowe.jhdb.core.DB;
-import com.jimmyhowe.jhdb.core.utilities.ConsoleDumper;
-import com.jimmyhowe.jhdb.sqlite.SQLitePlugin;
+import com.jimmyhowe.jhdb.core.schema.Schema;
+import com.jimmyhowe.jhdb.core.schema.Table;
 
-import java.sql.ResultSet;
-
-public class SQLiteDriver extends PluginDriver
+public class PluginDriver
 {
-    public static void main(String[] args)
+    protected static void buildTestTable()
     {
-        DB.use(new SQLitePlugin());
-
-        DB.execute("DROP TABLE users");
-
-        buildTestTable();
-
-        DB.table("users").insertInto("name").values("Jimmy");
-        DB.table("users").insertInto("name").values("Twig");
-
-        ResultSet results = DB.select("SELECT * FROM users");
-
-        ConsoleDumper.dumpResultSet(results);
+        Schema.create("users", (Table table) -> {
+            table.increments("id");
+            table.string("name");
+            table.string("email", 255).nullable();
+            table.bool("activated").nullable();
+            table.timestamps();
+        });
     }
 }

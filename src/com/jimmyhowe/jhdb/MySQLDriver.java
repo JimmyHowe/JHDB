@@ -25,13 +25,12 @@
 package com.jimmyhowe.jhdb;
 
 import com.jimmyhowe.jhdb.core.DB;
-import com.jimmyhowe.jhdb.core.schema.Schema;
 import com.jimmyhowe.jhdb.core.utilities.ConsoleDumper;
 import com.jimmyhowe.jhdb.mysql.MySQLPlugin;
 
 import java.sql.ResultSet;
 
-public class MySQLDriver
+public class MySQLDriver extends PluginDriver
 {
     public static void main(String[] args)
     {
@@ -41,13 +40,7 @@ public class MySQLDriver
 
 //        DB.execute("CREATE TABLE users (id INT UNSIGNED AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY (id))");
 
-        Schema.create("users", table -> {
-            table.increments("id");
-            table.string("name");
-            table.string("email", 255).nullable();
-            table.bool("activated").nullable();
-            table.timestamps();
-        });
+        buildTestTable();
 
         DB.table("users").insertInto("name").values("Jimmy");
         DB.table("users").insertInto("name").values("Twig");
