@@ -93,7 +93,7 @@ public class MySQLSchemaGrammar extends SchemaGrammar
      * @return Compiled Column
      */
     @NotNull
-    public String compileInteger(Column column)
+    public String compileInteger(@NotNull Column column)
     {
         StringBuilder builder = new StringBuilder(column.getName());
 
@@ -175,8 +175,9 @@ public class MySQLSchemaGrammar extends SchemaGrammar
         return "SELECT * FROM sqlite_master WHERE type = 'table' AND name = " + wrapTable(table);
     }
 
+    @NotNull
     @Override
-    public String dropIfExists(Table table, String command, Connection connection)
+    public String dropIfExists(@NotNull Table table, String command, Connection connection)
     {
         return "DROP TABLE IF EXISTS " + table.getTableName();
     }

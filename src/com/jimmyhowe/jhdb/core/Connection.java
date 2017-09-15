@@ -75,6 +75,7 @@ public abstract class Connection
     /**
      * The JHDB connection.
      */
+    @Nullable
     private java.sql.Connection connection;
 
     /**
@@ -342,6 +343,7 @@ public abstract class Connection
      *
      * @return The JDBC Connection
      */
+    @Nullable
     public java.sql.Connection getConnection()
     {
         return connection;

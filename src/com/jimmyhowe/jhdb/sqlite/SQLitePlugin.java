@@ -77,6 +77,7 @@ public class SQLitePlugin implements Plugin
      *
      * @return self
      */
+    @NotNull
     public SQLitePlugin setDriver(String driver)
     {
         this.driver = driver;
@@ -148,6 +149,7 @@ public class SQLitePlugin implements Plugin
      *
      * @return self
      */
+    @NotNull
     public SQLitePlugin setDatabase(String database)
     {
         this.database = database;
@@ -168,6 +170,7 @@ public class SQLitePlugin implements Plugin
      *
      * @return self
      */
+    @NotNull
     public SQLitePlugin setPrefix(String prefix)
     {
         this.prefix = prefix;
@@ -180,6 +183,7 @@ public class SQLitePlugin implements Plugin
      *
      * @return self
      */
+    @NotNull
     public SQLitePlugin inMemory()
     {
         this.database = ":memory:";

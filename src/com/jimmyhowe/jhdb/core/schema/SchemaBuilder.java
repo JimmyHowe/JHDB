@@ -167,7 +167,7 @@ public class SchemaBuilder
         }
     }
 
-    private void performDropIfExists(Connection connection, String table)
+    private void performDropIfExists(@NotNull Connection connection, String table)
     {
         blueprint = createBlueprint(table);
 

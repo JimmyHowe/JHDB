@@ -56,6 +56,7 @@ public class MySQLPlugin implements Plugin
 
     private String engine = "";
 
+    @NotNull
     public String getDriver()
     {
         return driver;

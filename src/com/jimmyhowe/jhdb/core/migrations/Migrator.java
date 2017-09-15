@@ -38,6 +38,7 @@ public class Migrator
     /**
      * Migrations
      */
+    @NotNull
     private static List<Migration> migrations = new ArrayList<>();
 
     /**

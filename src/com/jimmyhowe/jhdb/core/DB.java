@@ -54,6 +54,7 @@ public class DB
     /**
      * Event Dispatcher
      */
+    @NotNull
     public static Dispatcher dispatcher = new Dispatcher();
 
     /**
@@ -76,6 +77,7 @@ public class DB
     /**
      * DB Facade log
      */
+    @NotNull
     private static Log runningLog = new Log();
 
     /**
@@ -97,7 +99,7 @@ public class DB
      *
      * @return The connection associated with the plugin
      */
-    public static Plugin use(Class<? extends Plugin> pluginClass)
+    public static Plugin use(@NotNull Class<? extends Plugin> pluginClass)
     {
         Plugin plugin = initializePlugin(pluginClass);
 
@@ -144,7 +146,7 @@ public class DB
      * @param key         Plugin Key
      * @param pluginClass Class of plugin for instantiation
      */
-    public static Plugin register(String key, Class<? extends Plugin> pluginClass)
+    public static Plugin register(String key, @NotNull Class<? extends Plugin> pluginClass)
     {
         Plugin plugin = initializePlugin(pluginClass);
 
@@ -165,12 +167,12 @@ public class DB
      *
      * @return New instance of plugin or null if error occurred
      */
-    private static Plugin initializePlugin(Class<? extends Plugin> pluginClass)
+    private static Plugin initializePlugin(@NotNull Class<? extends Plugin> pluginClass)
     {
         try
         {
             return pluginClass.newInstance();
-        } catch ( InstantiationException | IllegalAccessException e )
+        } catch ( @NotNull InstantiationException | IllegalAccessException e )
         {
             e.printStackTrace();
         }
@@ -397,7 +399,7 @@ public class DB
      *
      * @return True or false on success
      */
-    public static boolean execute(String query)
+    public static boolean execute(@NotNull String query)
     {
         return getDefaultConnection().execute(query);
     }
@@ -405,6 +407,7 @@ public class DB
     /**
      * @return The Dispatcher Instance
      */
+    @NotNull
     public static Dispatcher getDispatcher()
     {
         return dispatcher;
@@ -443,6 +446,7 @@ public class DB
     /**
      * @return DB Log
      */
+    @NotNull
     public static Log getRunningLog()
     {
         return runningLog;

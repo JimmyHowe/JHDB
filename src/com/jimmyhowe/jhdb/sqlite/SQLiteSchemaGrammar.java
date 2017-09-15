@@ -198,8 +198,9 @@ public class SQLiteSchemaGrammar extends SchemaGrammar
         return "SELECT * FROM sqlite_master WHERE type = 'table' AND name = " + wrapTable(table);
     }
 
+    @NotNull
     @Override
-    public String dropIfExists(Table table, String command, Connection connection)
+    public String dropIfExists(@NotNull Table table, String command, Connection connection)
     {
         return "DROP TABLE IF EXISTS " + table.getTableName();
     }
