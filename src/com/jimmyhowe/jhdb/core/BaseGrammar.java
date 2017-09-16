@@ -72,8 +72,7 @@ public abstract class BaseGrammar
     @NotNull
     public String wrapTable(String table)
     {
-//        return wrap(tablePrefix + table, true);
-        return tablePrefix + table;
+        return wrap(tablePrefix + table, true);
     }
 
     /**
