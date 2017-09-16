@@ -15,6 +15,8 @@
       <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/plugins/junit/lib/opentest4j-1.0.0-M2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../Libraries/mockito-all-1.10.19.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/redist/annotations-java8.jar" path-in-jar="/" />
+      <element id="module-output" name="jhlog" />
+      <element id="file-copy" path="$APPLICATION_HOME_DIR$/redist/annotations-java8.jar" />
     </root>
   </artifact>
 </component>

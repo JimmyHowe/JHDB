@@ -28,7 +28,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" scope="TEST">
       <library>
         <CLASSES>
           <root url="jar://$APPLICATION_HOME_DIR$/plugins/junit/lib/junit-jupiter-api-5.0.0-M4.jar!/" />
@@ -38,13 +38,13 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="mockito-all-1.10.19" level="application" />
+    <orderEntry type="library" scope="TEST" name="mockito-all-1.10.19" level="application" />
     <orderEntry type="library" name="mysql-connector-java-5.1.38-bin" level="project" />
     <orderEntry type="module" module-name="Dispatcher" />
     <orderEntry type="module" module-name="ColorConsole" />
     <orderEntry type="library" name="sqlite-jdbc-3.14.2.1" level="project" />
     <orderEntry type="library" name="jhlog" level="project" />
-    <orderEntry type="module" module-name="jhlog" scope="TEST" />
+    <orderEntry type="module" module-name="jhlog" />
     <orderEntry type="library" name="Tap" level="project" />
   </component>
 </module>
