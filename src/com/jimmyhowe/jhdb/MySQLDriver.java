@@ -47,6 +47,10 @@ public class MySQLDriver extends PluginDriver
 
         ResultSet results = DB.select("SELECT * FROM users");
 
+        String sql = DB.table("users").select("id as primary_key").toSql();
+
+        System.out.println(sql);
+
         ConsoleDumper.dumpResultSet(results);
 
         DB.getDefaultConnection().getQueryLog().toConsole();

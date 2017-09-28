@@ -66,13 +66,14 @@ public abstract class BaseGrammar
         return '"' + getValue(table) + '"';
     }
 
+
     /**
      * @param table
      */
     @NotNull
     public String wrapTable(String table)
     {
-        return wrap(tablePrefix + table, true);
+        return table;
     }
 
     /**
@@ -232,8 +233,10 @@ public abstract class BaseGrammar
         return value;
     }
 
+
     /**
-     * Convert an array of column names into a delimited string.
+     * Convert an array of column names into a delimited string. This method calls the implode method from the Str
+     * library. Each of the passed strings are separated into columns after being processed by the wrap function.
      *
      * @param columns List of columns
      *
