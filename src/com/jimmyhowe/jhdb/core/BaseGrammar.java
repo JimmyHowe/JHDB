@@ -214,8 +214,7 @@ public abstract class BaseGrammar
     }
 
     /**
-     * Wraps the passed string in doubles-quotes, and if the string contains any double-quotes then it doubles the
-     * quotes... simple.
+     * Wraps a SQL value
      *
      * @param value Any string value
      *
@@ -226,8 +225,8 @@ public abstract class BaseGrammar
     {
         if ( ! Objects.equals(value, "*") )
         {
-            return "\"" + value.replace("\"", "\"\"") + "\"";
-//            return "`" + value.replace("\"", "\"\"") + "`";
+//            return "\"" + value.replace("\"", "\"\"") + "\"";
+            return value.replace("\"", "\"\"");
         }
 
         return value;

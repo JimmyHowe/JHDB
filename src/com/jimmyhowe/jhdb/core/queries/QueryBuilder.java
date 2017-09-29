@@ -24,7 +24,6 @@
 
 package com.jimmyhowe.jhdb.core.queries;
 
-import com.jimmyhowe.colorconsole.Console;
 import com.jimmyhowe.jhdb.core.Connection;
 import com.jimmyhowe.jhdb.core.processors.PostProcessor;
 import com.jimmyhowe.jhdb.core.queries.components.*;
@@ -529,8 +528,6 @@ public class QueryBuilder
     @NotNull
     public String toSql()
     {
-        Console.green(String.valueOf(queryGrammar));
-
         return this.queryGrammar.compileSelect(this);
     }
 

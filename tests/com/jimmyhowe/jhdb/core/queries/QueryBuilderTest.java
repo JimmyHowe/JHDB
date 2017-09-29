@@ -1,5 +1,6 @@
 package com.jimmyhowe.jhdb.core.queries;
 
+import com.jimmyhowe.jhdb.core.Connection;
 import com.jimmyhowe.jhdb.core.Plugin;
 import com.jimmyhowe.jhdb.core.processors.TableProcessor;
 import com.jimmyhowe.jhdb.core.queries.components.AndWhere;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 
 class QueryBuilderTest
 {
@@ -34,17 +36,13 @@ class QueryBuilderTest
 
     private QueryBuilder getQueryBuilder()
     {
+        Connection connection = mock(Connection.class);
+
         return new QueryBuilder(
-                plugin.getConnection(),
-                plugin.getQueryGrammar(),
+                connection,
+                new StubQueryGrammar(),
                 new TableProcessor()
         ).from("test");
-    }
-
-    @Test
-    public void it_can_return_table_name() throws Exception
-    {
-        assertEquals("test", this.queryBuilder.getTableName());
     }
 
     @Test
@@ -277,5 +275,10 @@ class QueryBuilderTest
 //
 //        assertEquals(expected, actual);
 //    }
+
+}
+
+class StubQueryGrammar extends QueryGrammar
+{
 
 }
