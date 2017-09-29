@@ -1,14 +1,10 @@
 package com.jimmyhowe.jhdb.core.queries;
 
 import com.jimmyhowe.jhdb.core.Connection;
-import com.jimmyhowe.jhdb.core.Plugin;
 import com.jimmyhowe.jhdb.core.processors.TableProcessor;
 import com.jimmyhowe.jhdb.core.queries.components.AndWhere;
 import com.jimmyhowe.jhdb.core.queries.components.OrWhere;
 import com.jimmyhowe.jhdb.core.queries.components.Where;
-import com.jimmyhowe.jhdb.sqlite.SQLitePlugin;
-import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,9 +13,6 @@ import static org.mockito.Mockito.mock;
 
 class QueryBuilderTest
 {
-    @NotNull
-    private Plugin plugin = new SQLitePlugin().inMemory();
-
     private QueryBuilder queryBuilder;
 
     @BeforeEach
@@ -28,12 +21,9 @@ class QueryBuilderTest
         queryBuilder = getQueryBuilder();
     }
 
-    @AfterEach
-    public void tearDown() throws Exception
-    {
-
-    }
-
+    /**
+     * @return Fresh QueryBuilder Instance
+     */
     private QueryBuilder getQueryBuilder()
     {
         Connection connection = mock(Connection.class);
@@ -59,6 +49,16 @@ class QueryBuilderTest
     }
 
     @Test
+    public void it_can_generate_a_select_distinct() throws Exception
+    {
+        String expected = "SELECT DISTINCT email FROM test";
+
+        Object actual = this.queryBuilder.distinct().select("email").toSql();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void it_can_generate_a_simple_select_with_columns_and_alias() throws Exception
     {
         String expected = "SELECT id, name AS username, email FROM test";
@@ -67,28 +67,28 @@ class QueryBuilderTest
     }
 
     @Test
-    public void it_can_generate_a_select_all_with_a_where_statement() throws Exception
+    public void it_can_generate_a_simple_where_statement() throws Exception
     {
         assertEquals("SELECT * FROM test WHERE name = 'Jimmy'",
                      this.queryBuilder.where("name", "Jimmy").toSql());
     }
 
     @Test
-    public void it_can_generate_a_select_all_with_a_where_not_statement() throws Exception
-    {
-        assertEquals("SELECT * FROM test WHERE name != 'Jimmy'",
-                     this.queryBuilder.whereNot("name", "Jimmy").toSql());
-    }
-
-    @Test
-    public void it_can_generate_a_select_all_with_a_where_statement_with_operator() throws Exception
+    public void it_can_generate_a_where_statement_with_operator() throws Exception
     {
         assertEquals("SELECT * FROM test WHERE name != 'Jimmy'",
                      this.queryBuilder.where("name", "!=", "Jimmy").toSql());
     }
 
     @Test
-    public void it_can_generate_a_select_all_with_an_order_statement() throws Exception
+    public void it_can_generate_a_where_not_statement() throws Exception
+    {
+        assertEquals("SELECT * FROM test WHERE name != 'Jimmy'",
+                     this.queryBuilder.whereNot("name", "Jimmy").toSql());
+    }
+
+    @Test
+    public void it_can_generate_a_simple_order_statement() throws Exception
     {
         assertEquals("SELECT * FROM test ORDER BY name ASC", this.queryBuilder.orderBy("name").toSql());
     }
@@ -112,7 +112,7 @@ class QueryBuilderTest
 
         Object actual = this.queryBuilder.where("name", "Jimmy").orderBy("name", "DESC").toSql();
 
-//        assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -121,16 +121,6 @@ class QueryBuilderTest
         String expected = "SELECT * FROM test WHERE name = 'Jimmy' ORDER BY name DESC LIMIT 1";
 
         Object actual = this.queryBuilder.where("name", "Jimmy").orderBy("name", "DESC").limit(1).toSql();
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void it_can_generate_a_select_distinct() throws Exception
-    {
-        String expected = "SELECT DISTINCT email FROM test";
-
-        Object actual = this.queryBuilder.distinct().select("email").toSql();
 
         assertEquals(expected, actual);
     }
