@@ -46,5 +46,15 @@
     <orderEntry type="library" name="jhlog" level="project" />
     <orderEntry type="module" module-name="jhlog" />
     <orderEntry type="library" name="Tap" level="project" />
+    <orderEntry type="module-library" scope="TEST">
+      <library name="JUnit5">
+        <CLASSES>
+          <root url="jar://$APPLICATION_HOME_DIR$/plugins/junit/lib/junit-jupiter-api-5.0.0.jar!/" />
+          <root url="jar://$APPLICATION_HOME_DIR$/plugins/junit/lib/opentest4j-1.0.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

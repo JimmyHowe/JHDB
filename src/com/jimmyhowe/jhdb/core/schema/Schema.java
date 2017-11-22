@@ -107,9 +107,9 @@ public class Schema
      * @return
      */
     @Contract(pure = true)
-    public static boolean dropIfExists(String tableName)
+    public static void dropIfExists(String tableName)
     {
-        return false;
+        getSchemaBuilder().dropIfExists(tableName);
     }
 
     /**

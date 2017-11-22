@@ -40,19 +40,14 @@ class DBTest
     }
 
     @Test
-    void it_can_accept_plugins()
+    void it_can_register_a_single_plugin()
     {
         Plugin mockPlugin = getMockPlugin();
 
         DB.use(mockPlugin);
 
-        assertEquals(DB.getDefaultPluginKey(), DB.getDefaultPluginKey());
+        assertEquals(DB.DEFAULT_PLUGIN_KEY, DB.getDefaultPluginKey());
         assertEquals(mockPlugin, DB.getDefaultPlugin());
-    }
-
-    private Plugin getMockPlugin()
-    {
-        return mock(Plugin.class);
     }
 
     @Test
@@ -78,11 +73,12 @@ class DBTest
 
         DB.use(mockPlugin);
 
-        assertEquals("default", DB.getDefaultPluginKey());
-        assertEquals(mockConnection, DB.resolveConnectionFromPlugin("default"));
+        assertEquals(DB.DEFAULT_PLUGIN_KEY, DB.getDefaultPluginKey());
+        assertEquals(mockConnection, DB.resolveConnectionFromPlugin(DB.DEFAULT_PLUGIN_KEY));
     }
 
 //    @Test
+
     void testLogWorks()
     {
         DB.getRunningLog().info("info");
@@ -94,5 +90,10 @@ class DBTest
         assertEquals("note", DB.getRunningLog().getRawMessageAt(1));
         assertEquals("debug", DB.getRunningLog().getRawMessageAt(2));
         assertEquals("error", DB.getRunningLog().getRawMessageAt(3));
+    }
+
+    private Plugin getMockPlugin()
+    {
+        return mock(Plugin.class);
     }
 }

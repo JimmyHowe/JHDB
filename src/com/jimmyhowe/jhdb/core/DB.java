@@ -35,12 +35,19 @@ import org.jetbrains.annotations.Nullable;
 import java.sql.ResultSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Database Facade
  */
 public class DB
 {
+
+    /**
+     * Default Plugin Key
+     */
+    public static final String DEFAULT_PLUGIN_KEY = "_default";
+
     /**
      * Outputs queries before performing
      */
@@ -89,7 +96,7 @@ public class DB
      */
     public static Plugin use(@NotNull Plugin plugin)
     {
-        return register("default", plugin);
+        return register(DEFAULT_PLUGIN_KEY, plugin);
     }
 
     /**
@@ -452,11 +459,21 @@ public class DB
         return runningLog;
     }
 
+    /**
+     * @param name Plugin name
+     *
+     * @return
+     */
     public static Plugin getPlugin(String name)
     {
         return plugins.get(name);
     }
 
+    /**
+     * @param plugin Plugin name
+     *
+     * @return Connection
+     */
     public static Connection resolveConnectionFromPlugin(String plugin)
     {
         return getPlugin(plugin).getConnection();
@@ -468,5 +485,13 @@ public class DB
     public static void flushPlugins()
     {
         plugins = new LinkedHashMap<>();
+    }
+
+    /**
+     * @return List of connections
+     */
+    public static Set<String> getConnectionList()
+    {
+        return connections.keySet();
     }
 }
