@@ -207,7 +207,7 @@ public abstract class BaseGrammar
 
         for ( int i = 0; i < values.length; i++ )
         {
-            stringValues[i] = wrapValue((values[i].toString()));
+            stringValues[i] = wrapValue(values[i].toString());
         }
 
         return stringValues;
@@ -225,8 +225,7 @@ public abstract class BaseGrammar
     {
         if ( ! Objects.equals(value, "*") )
         {
-//            return "\"" + value.replace("\"", "\"\"") + "\"";
-            return value.replace("\"", "\"\"");
+            return "\"" + value.replace("\"", "\"\"") + "\"";
         }
 
         return value;

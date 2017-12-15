@@ -71,6 +71,8 @@ public abstract class Connector implements DetectsLostConnections, DetectsMissin
     @Nullable
     public Connection createConnection(@NotNull String dsn, Properties config, Properties options)
     {
+        // TODO: Move these
+
         String username = "root";
         String password = "";
 

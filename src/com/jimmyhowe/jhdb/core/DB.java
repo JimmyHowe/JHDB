@@ -42,7 +42,6 @@ import java.util.Set;
  */
 public class DB
 {
-
     /**
      * Default Plugin Key
      */

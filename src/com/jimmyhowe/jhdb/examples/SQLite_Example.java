@@ -24,19 +24,30 @@
 
 package com.jimmyhowe.jhdb.examples;
 
-import com.jimmyhowe.jhdb.core.schema.Blueprint;
-import com.jimmyhowe.jhdb.core.schema.Table;
+import com.jimmyhowe.jhdb.core.DB;
+import com.jimmyhowe.jhdb.core.schema.Schema;
+import com.jimmyhowe.jhdb.core.tables.rows.Rows;
+import com.jimmyhowe.jhdb.core.utilities.ConsoleDumper;
+import com.jimmyhowe.jhdb.sqlite.SQLitePlugin;
+import org.jetbrains.annotations.Nullable;
 
-public class UsersTable implements Blueprint
+public class SQLite_Example
 {
-    /**
-     * @param table Table Builder
-     */
-    @Override
-    public void build(Table table)
+    public static void main(String[] args)
     {
-        table.increments("id");
-        table.string("first_name");
-        table.string("last_name");
+        SQLitePlugin plugin = new SQLitePlugin();
+
+        DB.use(plugin);
+
+        Schema.dropIfExists("users");
+
+        Schema.create("users", new UsersTable());
+
+        DB.table("users").insertInto("first_name", "last_name").values("Jimmy", "Howe");
+
+        @Nullable Rows results = DB.table("users").get();
+
+        assert results != null;
+        ConsoleDumper.dumpRows(results);
     }
 }
