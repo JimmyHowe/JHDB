@@ -22,37 +22,38 @@
  * SOFTWARE.
  */
 
-package com.jimmyhowe.jhdb;
+package com.jimmyhowe.jhdb.testing;
 
 import com.jimmyhowe.jhdb.core.DB;
-import com.jimmyhowe.jhdb.core.utilities.ConsoleDumper;
-import com.jimmyhowe.jhdb.mysql.MySQLPlugin;
+import com.jimmyhowe.jhdb.core.schema.Schema;
+import com.jimmyhowe.jhdb.core.tables.rows.Rows;
+import com.jimmyhowe.jhdb.sqlite.SQLitePlugin;
+import org.jetbrains.annotations.Nullable;
 
-import java.sql.ResultSet;
-
-public class MySQLDriver extends PluginDriver
+public class MultipleTest extends TestingEnvironment
 {
     public static void main(String[] args)
     {
-        DB.use(new MySQLPlugin());
+        InitializeTestingEnvironment();
 
-        DB.execute("DROP TABLE IF EXISTS users");
+        DB.register("first", new SQLitePlugin().inMemory());
+        DB.register("second", new SQLitePlugin().inMemory());
 
-//        DB.execute("CREATE TABLE users (id INT UNSIGNED AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY (id))");
+        Schema.connections("first", "second").dropIfExists("users");
 
-        buildTestTable();
+        Schema.connections("first", "second").create("users", table -> {
+            table.increments("id");
+            table.string("name");
+        });
 
-        DB.table("users").insertInto("name").values("Jimmy");
-        DB.table("users").insertInto("name").values("Twig");
+        DB.connection("first").table("users").insertInto("name").values("Jimmy");
+        DB.connection("first").table("users").insertInto("name").values("Brian");
 
-        ResultSet results = DB.select("SELECT * FROM users");
+        @Nullable Rows firstTableEntries = DB.connection("first").table("users").get();
 
-        String sql = DB.table("users").select("id as primary_key").toSql();
+        System.out.println(firstTableEntries.first());
+        System.out.println(firstTableEntries.last());
 
-        System.out.println(sql);
-
-        ConsoleDumper.dumpResultSet(results);
-
-        DB.getDefaultConnection().getQueryLog().toConsole();
+        DB.getRunningLog().toConsole();
     }
 }

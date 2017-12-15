@@ -7,3 +7,8 @@
     QueryGrammar    Query Grammar         
     SchemaGrammar   Schema Grammar         
     
+
+
+    Plugin      mysql
+    Connection  mysql.1
+    Connection  mysql.2

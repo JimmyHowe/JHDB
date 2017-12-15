@@ -22,38 +22,25 @@
  * SOFTWARE.
  */
 
-package com.jimmyhowe.jhdb;
+package com.jimmyhowe.jhdb.testing;
 
+import com.jimmyhowe.colorconsole.Console;
 import com.jimmyhowe.jhdb.core.DB;
-import com.jimmyhowe.jhdb.core.schema.Schema;
-import com.jimmyhowe.jhdb.core.tables.rows.Rows;
-import com.jimmyhowe.jhdb.sqlite.SQLitePlugin;
-import org.jetbrains.annotations.Nullable;
 
-public class MultipleTest extends TestingEnvironment
+public class TestingEnvironment
 {
-    public static void main(String[] args)
+    public static void InitializeTestingEnvironment()
     {
-        InitializeTestingEnvironment();
+        DB.getRunningLog().onNote(Console::white);
+        DB.getRunningLog().onInfo(Console::cyan);
+        DB.getRunningLog().onDebug(Console::yellow);
+        DB.getRunningLog().onError(message -> Console.red(message.toUpperCase()));
 
-        DB.register("first", new SQLitePlugin().inMemory());
-        DB.register("second", new SQLitePlugin().inMemory());
-
-        Schema.connections("first", "second").dropIfExists("users");
-
-        Schema.connections("first", "second").create("users", table -> {
-            table.increments("id");
-            table.string("name");
+        DB.onCantConnect(() -> {
+            Console.red("Cant Connect to Database");
+            System.exit(0);
         });
 
-        DB.connection("first").table("users").insertInto("name").values("Jimmy");
-        DB.connection("first").table("users").insertInto("name").values("Brian");
-
-        @Nullable Rows firstTableEntries = DB.connection("first").table("users").get();
-
-        System.out.println(firstTableEntries.first());
-        System.out.println(firstTableEntries.last());
-
-        DB.getRunningLog().toConsole();
+//        DB.getDispatcher().onMisfire(() -> {});
     }
 }
